@@ -140,7 +140,7 @@ app.post('/auth', async (req, res)=>{
 //12 - Método para controlar que está auth en todas las páginas
 app.get('/', (req, res)=> {
 	if (req.session.loggedin) {
-		res.render('index',{
+		res.render('index_2.ejs',{
 			login: true,
 			name: req.session.name
         });		
@@ -152,6 +152,7 @@ app.get('/', (req, res)=> {
 	}
 	res.end();
 });
+
 
 
 //función para limpiar la caché luego del logout
