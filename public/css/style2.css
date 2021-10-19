@@ -16,21 +16,43 @@ body{
 
 .icono-menu img{
     vertical-align: top;
-    width: 40px;
+    width: 80px;
     cursor: pointer;
 }
+
+#icono-menu {display:inline-block; ; padding:10px}
+#titulo {display:inline-block; padding:10px}
+#logout {display:inline-block; padding:10px}
+
+.icono-menu ul a{
+    vertical-align: top;
+    height: 80px;
+    background-color: crimson;
+    text-align: center;
+    text-justify: distribute-all-lines;
+}
+
+.icono-menu ul input{
+    vertical-align: top;
+    height: 80px;
+    padding-right: 500px;
+    background-color: crimson;
+}
+
 
 /* Estilos para el contenedor del Menú */
 .cont-menu{
     background-color: rgb(42,42,42);
     box-shadow: 2px 0px 5px 2px rgb(66,66,66);
-    width: 400px;
+    width: 350px;
     height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
     transition: all .5s ease;
 }
+
+
 
 /* Estilos por agregar en JavaScript */
 .active{
@@ -39,12 +61,12 @@ body{
 
 /* Estilos para el listado del Menú */
 .cont-menu ul{
-    padding: 100px 0px 20px 0px;
+    padding: 100px 0px 2px 0px;
     list-style: none;
 }
 
-.cont-menu ul li{
-    color: white;
+.cont-menu ul input{
+    color: black;
     display: block;
     font-size: 25px;
     text-decoration: none;
@@ -52,9 +74,9 @@ body{
     cursor: pointer;
 }
 
-.cont-menu ul li:hover{
-    background-color: rgb(228,228,228);
-    color: rgb(42,42,42);
+.cont-menu ul input:hover{
+    background-color: rgb(82, 82, 121);
+    color: rgb(56, 60, 82);
 }
 
 
