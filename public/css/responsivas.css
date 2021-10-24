@@ -1,0 +1,166 @@
+/*Estilos para el centro de la pagina*/
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+/*
+
+.entrada > p,
+.entrada > input{
+    background-color: cornsilk;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+
+form{
+    margin: 150px auto;
+}
+
+form > legend{
+    background-color: white;
+}
+
+.entrada{
+    width: 90%;
+    max-width: 600px;
+    margin: 5px auto;
+    display: grid;
+    grid-gap: 2px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, auto);
+
+    grid-template-areas: "p entrada";
+}
+
+.entrada > p{
+    grid-area: p;
+}
+
+.input-entrada{
+    grid-area: entrada;
+}
+
+*/
+
+.centro{
+    width: 90%;
+    margin: 110px auto;
+    font-size: 20px;
+    
+    display: grid;
+    grid-template-rows: auto auto auto;
+    align-items: center;
+    
+    /*display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;*/
+    
+}
+
+
+.form-1{
+    background-color: rgb(215, 216, 243);
+    border-radius: 3px;
+    color: rgb(83, 83, 83);
+    font-size: 0.8em;
+    padding: 10px;
+    margin: 0 auto;
+    width: 50%;
+}
+.form-2{
+    background-color: rgb(215, 216, 243);
+    border-radius: 3px;
+    color: rgb(83, 83, 83);
+    font-size: 0.8em;
+    padding: 10px;
+    margin: 0 auto;
+    width: 50%;
+}
+.form-3{
+    background-color: rgb(215, 216, 243);
+    border-radius: 3px;
+    color: rgb(83, 83, 83);
+    font-size: 0.8em;
+    padding: 10px;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.input-entrada{
+    color: rgb(83, 83, 83);
+}
+
+/*
+.form-1 legend{
+    padding: 5px;
+    color: mintcream;
+    background-color: rgb(30, 30, 90);
+}
+*/
+
+input textarea{
+
+    outline: none;
+
+    width: 400px;
+}
+
+.form-1 p{
+    margin-left: 2.5%;
+}
+
+.form-3 p{
+    margin-left: 2.5%;
+}
+
+
+
+.input-entrada{
+    margin-left: 2.5%;
+    border: solid 1px #ccc;
+    padding: 10px;
+    width: 95%;
+    
+}
+
+.input-entrada:focus{
+    border-color: #18A383;
+}
+
+.center-content{
+    text-align: center;
+}
+
+
+.lista{
+    margin-left: 2.5%;
+    border: solid 1px #ccc;
+    padding: 10px;
+    width: 95%;
+}
+
+
+/*Estilis para el boton */
+.boton-enviar{
+	border-radius: 3px;
+	display: inline-block;
+	padding: 20px 15px;
+	text-decoration: none;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+	box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    width: 50%;
+
+}
+
+.boton-enviar{
+	color: white;
+	background-color: #3CC93F;
+}
+.boton-enviar:hover{
+	background-color: #37B839;	
+}
+.boton-enviar:active{
+	background-color: #29962A;
+}

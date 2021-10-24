@@ -2,158 +2,175 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: verdana;
 }
+  
 body{
-    background-color: #ffffff;
+    min-height: 100vh;
+    background-color:midnightblue;
 }
-/*Estilos para el header */
+  
 
-header {
+
+
+/*Estilos para el header*/
+header{
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 600px;
-    background: #bc4e9c;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, hsla(340, 95%, 50%, 0.459), hsla(317, 45%, 52%, 0.664)), url(../img/portada.jpg);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, hsla(340, 95%, 50%, 0.459), hsla(317, 45%, 52%, 0.664)), url(../img/portada.jpg);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background-size: cover;
-    background-attachment: fixed;
-    position: relative;
-}
-
-nav{
-    text-align: right;
-    padding: 30px 50px 0 0;
-}
-
-nav > a{
-    color:#fff;
-    font-weight: 300;
-    text-decoration: none;
-    margin-right: 10px;
-}
-
-nav > a:hover{
-    text-decoration: underline;
-}
-
-header .textos-header{
     display: flex;
-    height: 430px;
-    width: 100%;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    padding: 20px 80px;
+    transition: 0.6s;
+}
+
+header.down{
+  background: #1483D5;
+  padding: 15px 80px;
+}
+
+.brand{
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+.menu{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu ul{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.menu a{
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 0 30px;
+    padding: 3px 7px;
+    border-radius: 20px;
+    transition: 0.3s;
+    transition-property: color, background;
     text-align: center;
 }
 
-.textos-header h1{
-    font-size: 50px;
-    color:#fff;
+
+.menu a:hover{
+  color: #000;
+  background-color: rgb(162, 155, 236) ;
 }
 
-.textos-header h2{
-    font-size: 30px;
-    font-weight: 300;
-    color:#fff;
+.section-two{
+  padding: 20px;
 }
 
-.wave{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+.btn{
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  display: none;
 }
 
+@media (max-width: 991px){
+  header, header.down{
+  	padding: 20px 40px;
+  }
+  .btn{
+    display: block;
+  }
 
-
-/* Estilos para el ícono del Menú */
-.icono-menu{
-    position: relative;
-    z-index: 10;
-}
-
-.icono-menu img{
-    vertical-align: top;
-    width: 80px;
-    cursor: pointer;
-}
-
-#icono-menu {display:inline-block; ; padding:10px}
-#titulo {display:inline-block; padding:10px}
-#logout {display:inline-block; padding:10px}
-
-.icono-menu ul a{
-    vertical-align: top;
-    height: 80px;
-    background-color: crimson;
-    text-align: center;
-    text-justify: distribute-all-lines;
-}
-
-.icono-menu ul input{
-    vertical-align: top;
-    height: 80px;
-    padding-right: 500px;
-    background-color: crimson;
-}
-
-
-/* Estilos para el contenedor del Menú */
-.cont-menu{
-    background-color: rgb(42,42,42);
-    box-shadow: 2px 0px 5px 2px rgb(66,66,66);
-    width: 350px;
+  .menu{
+    position: fixed;
+    background:#1483D5;
+    min-width: 330px;
     height: 100vh;
+    top: 0;
+    right: -100%;
+    padding: 80px 50px;
+    transition: 0.5s;
+    transition-property: right;
+  }
+
+  .menu ul{
+	  flex-direction: column;
+	}
+
+  .menu.active{
+    right: 0;
+  }
+
+  .menu .close-btn{
     position: absolute;
     top: 0;
     left: 0;
-    transition: all .5s ease;
-}
+    margin: 25px;
+  }
 
-
-
-/* Estilos por agregar en JavaScript */
-.active{
-    transform: translate(-600px);
-}
-
-/* Estilos para el listado del Menú */
-.cont-menu ul{
-    padding: 100px 0px 2px 0px;
-    list-style: none;
-}
-
-.cont-menu ul input{
-    color: black;
+  .menu a{
     display: block;
-    font-size: 25px;
-    text-decoration: none;
-    padding: 10px 50px;
-    cursor: pointer;
+    font-size: 20px;
+    margin: 20px;
+    padding: 0 15px;
+  }
 }
 
-.cont-menu ul input:hover{
-    background-color: rgb(82, 82, 121);
-    color: rgb(56, 60, 82);
+@media (max-width: 600px){
+  .section-main h1{
+    font-size: 50px;
+    line-height: 60px;
+  }
 }
 
+
+
+
+
+
+
+.miLink{
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 60px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 80px;
+    text-shadow: 0 0 3px #fff, 0 0 3px #000000;
+}
 
 /* footer */
 
-footer{
+.footer{
     background: #414141;
     padding: 60px 0 30px 0;
     margin: auto;
     overflow: hidden;
+    height: 20%;    
+
 }
 
 .contenedor-footer{
     display: flex;
-    width: 90%;
+    width: 80%;
     justify-content: space-evenly;
     margin: auto;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #ccc;
 }
 
@@ -163,9 +180,9 @@ footer{
 
 .content-foo h4{
     color: #fff;
-    border-bottom: 3px solid #af20d3;
+    border-bottom: 3px solid #e2429a;
     padding-bottom: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .content-foo p{

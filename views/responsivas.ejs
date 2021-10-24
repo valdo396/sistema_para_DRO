@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsivas</title>
+    <link rel="shortcut icon" href="resource/img/alexcgdesign.png" type="image/x-icon">
+    <link rel="stylesheet" href="resource/css/style2.css">
+    <link rel="stylesheet" href="resource/css/responsivas.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <header>
+            <a href="#" class="brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+                    <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z"/>
+                  </svg>
+            </a>
+            <nav class="menu">
+              <div class="btn">
+                <i class="fas fa-times close-btn"></i>
+              </div>
+              <ul>
+                  <a href="/inicio">Inicio</a>
+                  <a href="/responsivas">Registrar Responsivas</a>
+                  <a href="/consultas">Consultas</a>
+                  <a href="/informes">Informes</a>
+                  <a href="/reglamento">Leyes y Reglamentos</a>
+                  <a href="/logout">Cerrar sesión</a>
+              </ul>
+            </nav>
+            <div class="btn">
+              <i class="fas fa-bars menu-btn"></i>
+            </div>
+        </header>
+
+        
+        <div class="centro"> 
+            <form class="form-1">
+                <fieldset>
+                <legend><strong> Datos de la responsiva </strong></legend><br/><br/>
+                
+                
+                <div class="entrada"> 
+                    <p>Nombre de la responsiva</p>
+                    <input type="text" class="input-entrada" placeholder="Datos del registro de manifestación">
+                </div><br/>
+
+                <div class="entrada">
+                    <p>Folio</p>
+                    <input type="text" class="input-entrada" placeholder="Folio">
+                </div><br/>
+
+                <div class="entrada">
+                    <p>Fecha de emisión</p>
+                    <input type="date" class="input-entrada" placeholder="Dia/Mes/Año">
+                </div><br/>
+
+                <div class="entrada">
+                    <p>Vigencia</p> 
+                    <input type="date" class="input-entrada" placeholder="Dia/Mes/Año">
+                </div><br/>
+
+                
+                </fieldset>
+            </form><br/>
+            <form class="form-2">
+                <fieldset>
+                    <legend><strong> Domicilio </strong></legend><br/><br/>
+                    <div class="domicilio"> 
+                        <input type="text" class="input-entrada" placeholder="Calle">
+                        <input type="text" class="input-entrada" placeholder="Numero Exterior">
+                        <input type="text" class="input-entrada" placeholder="Número Interior">
+                        <br/>
+                        <input type="text" class="input-entrada" placeholder="Colonia">
+                        <input type="text" class="input-entrada" placeholder="Alcaldía">
+                        <input type="text" class="input-entrada" placeholder="Codigo postal">
+                    </div>
+                </fieldset>
+            </form><br/>
+            <form class="form-3">
+                <fieldset>    
+                    <legend><strong> Detalles de la resposiva </strong></legend><br/><br/>
+                    <div class="entrada"> 
+                        <p>Cuenta Catastral</p>
+                        <input type="text" class="input-entrada" placeholder="123-456-78-">
+                    </div><br/>
+    
+                    <div class="entrada">
+                        <p>Tipo</p>
+                        <input list="tipos" class="lista" placeholder="Seleccione un tipo">
+                        <datalist id="tipos" >
+                            <option>MANIFESTACION TIPO "B" </option>
+                            <option>MANIFESTACION TIPO "B" </option>
+                            <option> ESPECIALES y OTRAS RESPONSIVAS</option>
+                        </datalist>     
+                    </div><br/>
+    
+                    <div class="entrada"> 
+                        <p>MANIFESTACION DE CONSTRUCCION "B" ó "C"</p>
+                        <input list="manifes" class="lista" placeholder="Selesccione ---">
+                        <datalist id="manifes" >
+                            <option>No aplica </option>
+                            <option>Obra nueva </option>
+                            <option>Ampliación </option>
+                            <option>Modificación </option>
+                            <option>Reparación </option>
+                            <option>Barda (mayor de 2.50 m. de altura) </option>
+                            <option>Prórroga, (indicar % avance) </option>
+                            <option>Uso y Ocupacion </option>
+                        </datalist>                
+                    </div><br/>
+    
+                    <div class="entrada"> 
+                        <p>LICENCIA  DE CONSTRUCCION ESPECIAL</p>
+                        <input list="licencias" class="lista" placeholder="Selesccione ---">
+                        <datalist id="licencias">
+                            <option>No aplica </option>
+                            <option>Edificaciones en Suelo de Conservación </option>
+                            <option>Estaciones Repetidoras de  Comunicación Celular o Inalámbrica </option>
+                            <option>Inst. Subterráneas o Aéreas en la vía pública </option>
+                            <option>Demolición </option>
+                            <option>Excavaciones o Cortes cuya profundidad sea mayor de 1 m </option>
+                            <option>Tapiales que invadan la acera en una medida superior a 0.5 m </option>
+                            <option>Obras o instalaciones temporales </option>
+                            <option>Inst. o modificaciones en edificaciones existentes (ascensores, escaleras mecánicas) </option>
+                        </datalist>             
+                    </div><br/>
+                    
+                    <div class="entrada"> 
+                        <p>Destino de la Edificación</p>
+                        <input type="text" class="input-entrada" placeholder="Describir el uso del inmueble">
+                    </div><br/>
+    
+                    <div class="entrada"> 
+                        <p>Superficies</p>
+                        <input type="number" class="input-entrada" placeholder="Del predio m2">
+                        <input type="number" class="input-entrada" placeholder="De la responsiva m2">
+                    </div><br/>
+    
+                    <div class="entrada"> 
+                        <p>Número de niveles</p>
+                        <input type="number" class="input-entrada" placeholder="Sobre nivel de banqueta">
+                        <input type="number" class="input-entrada" placeholder="Sotantos">
+                    </div><br/>
+    
+                    <div class="entrada"> 
+                        <p>Número de viviendas</p>
+                        <input type="number" class="input-entrada" placeholder="Ingresa el número">
+                    </div><br/>
+    
+                    <div class="entrada"> 
+                        <p>Número de Cajones de Estacionamiento</p>
+                        <input type="number" class="input-entrada" placeholder="Ingresa el número">
+                    </div><br/>
+    
+                    <div class="entrada"> 
+                        <p>Area de Conservacion Patrimonial o Histórica</p>
+                        <input list="s/n" class="lista" placeholder="Selesccione ---">
+                        <datalist id="s/n">
+                            <option>Si </option>
+                            <option>No </option>
+                        </datalist>  
+                    </div><br/>
+    
+                    <div class="entrada"> 
+                        <p>Estaciones Repetidoras</p>
+                        <input type="number" class="input-entrada" placeholder="Altura Soporte"><br/>
+                        <input type="number" class="input-entrada" placeholder="No. de Antenas">
+                    </div><br/>
+    
+                    <div class="entrada">
+                        <p> Número de registro</p>
+                        <input type="number" class="input-entrada" placeholder="Ingresa el número">
+                    </div><br/>
+    
+                    <div class="entrada"> 
+                        <p>Nombre del propietario</p>
+                        <input type="text" class="input-entrada" placeholder="Ingresa el nombre">
+                        <input type="text" class="input-entrada" placeholder="Número del propietario">
+                    </div><br/>
+    
+                    <div class="entrada">
+                        <p> Obsrevaciones </p>
+                        <input type="text" class="input-entrada" placeholder="(en su caso avance de obra %, si se cuenta con autorización de uso y ocupación así manifestarlo) ">
+                    </div><br/>
+                </fieldset>
+            </form>
+
+            <p class="center-content">
+                <input type="submit" class="boton-enviar" value="Enviar Datos">
+            </p>
+            
+        </div>
+        
+
+
+        <div class="footer">
+            <div class="contenedor-footer">
+                <div class="content-foo">
+                    <h4>Phone</h4>
+                    <p>8296312</p>
+                </div>
+                <div class="content-foo">
+                    <h4>Email</h4>
+                    <p>8296312</p>
+                </div>
+                <div class="content-foo">
+                    <h4>Location</h4>
+                    <p>8296312</p>
+                </div>
+            </div>
+            <h2 class="titulo-final">&copy;  Design | TT</h2>
+        </div>
+    </div>
+    <script src="resource/js/menu.js"></script>
+</body>
+</html>

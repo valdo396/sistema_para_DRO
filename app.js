@@ -140,7 +140,7 @@ app.post('/auth', async (req, res)=>{
 //12 - Método para controlar que está auth en todas las páginas
 app.get('/', (req, res)=> {
 	if (req.session.loggedin) {
-		res.render('index_2.ejs',{
+		res.render('inicio.ejs',{
 			login: true,
 			name: req.session.name
         });		
@@ -153,7 +153,80 @@ app.get('/', (req, res)=> {
 	res.end();
 });
 
+app.get('/inicio',(req, res)=>{
+    if (req.session.loggedin) {
+		res.render('inicio.ejs',{
+			login: true,
+			name: req.session.name
+        });		
+	} else {
+		res.render('index.ejs',{
+			login:false,
+			name:'Debe iniciar sesión',			
+		});				
+	}
+	res.end();
+});
 
+app.get('/responsivas',(req, res)=>{
+    if (req.session.loggedin) {
+		res.render('responsivas.ejs',{
+			login: true,
+			name: req.session.name
+        });		
+	} else {
+		res.render('index.ejs',{
+			login:false,
+			name:'Debe iniciar sesión',			
+		});				
+	}
+	res.end();
+});
+
+app.get('/consultas',(req, res)=>{
+    if (req.session.loggedin) {
+		res.render('consultas.ejs',{
+			login: true,
+			name: req.session.name
+        });		
+	} else {
+		res.render('index.ejs',{
+			login:false,
+			name:'Debe iniciar sesión',			
+		});				
+	}
+	res.end();
+});
+
+app.get('/informes',(req, res)=>{
+    if (req.session.loggedin) {
+		res.render('informes.ejs',{
+			login: true,
+			name: req.session.name
+        });		
+	} else {
+		res.render('index.ejs',{
+			login:false,
+			name:'Debe iniciar sesión',			
+		});				
+	}
+	res.end();
+});
+
+app.get('/reglamento',(req, res)=>{
+    if (req.session.loggedin) {
+		res.render('reglamento.ejs',{
+			login: true,
+			name: req.session.name
+        });		
+	} else {
+		res.render('index.ejs',{
+			login:false,
+			name:'Debe iniciar sesión',			
+		});				
+	}
+	res.end();
+});
 
 //función para limpiar la caché luego del logout
 app.use(function(req, res, next) {
