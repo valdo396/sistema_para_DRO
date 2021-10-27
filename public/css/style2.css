@@ -10,7 +10,9 @@ body{
     background-color:midnightblue;
 }
   
-
+.letra-capit { text-transform: capitalize;}   
+.mayus { text-transform: uppercase;}   
+.minus { text-transform: lowercase;}
 
 
 /*Estilos para el header*/
@@ -144,15 +146,7 @@ header.down{
 
 
 
-.miLink{
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 60px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    line-height: 80px;
-    text-shadow: 0 0 3px #fff, 0 0 3px #000000;
-}
+
 
 /* footer */
 

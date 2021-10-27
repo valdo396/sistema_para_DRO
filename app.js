@@ -147,7 +147,7 @@ app.get('/', (req, res)=> {
 	} else {
 		res.render('index',{
 			login:false,
-			name:'Debe iniciar sesión',			
+			name:'Debe iniciar sesión para continuar',			
 		});				
 	}
 	res.end();
