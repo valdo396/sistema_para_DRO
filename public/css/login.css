@@ -1,0 +1,91 @@
+
+
+  
+  
+  
+  .login-form h1{
+    padding-top: 50%;
+    margin-bottom: 4%;
+    color: #0000001a;
+  }
+  
+  .login-formulario{
+    padding-top: 20%;
+  }
+  
+  /* Login form */
+  .login-form, .contenedor {
+    width: 300px;
+    margin: 0 auto;
+  }
+  .login-form h1 {
+    color:midnightblue ;
+    font-size: 28px;
+    padding: 70px 0 10px 0;
+  }
+  .login-form input[type="password"],
+  .login-form input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ced4da;
+    margin-bottom: 10px;
+    box-sizing:border-box;
+  }
+  
+  /* Estilos boton LOGIN*/
+  .btn-login{
+    margin-top: 15px;
+    border-radius: 20px;
+    width: 100%;
+    padding: 15px;
+    background-color: #856a68;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+    color: #ffffff;
+  }
+  .btn-login:hover,.btn-login:active{
+    color:#fff;
+    background-color:#534b4a;
+    border-color:#00000023
+  }
+  .btn-login:focus{
+    box-shadow:0 0 0 3px rgba(121,82,179,0.25)
+  }
+
+  
+.btn-login{
+    width: 100%;
+  }
+
+
+  
+/* Estilos boton REGISTER*/
+.btn-register{
+    border-radius: 20px;
+    width: 100%;
+    padding: 15px;
+    background-color: #a07253;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+    color: #ffffffcb;
+    margin-top: 20px;
+    /* Para dar la apariencia de un boton */
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    text-decoration: none;  
+  }
+  .btn-register:hover,.btn-register:active{
+    color:rgba(255, 255, 255, 0.815);
+    background-color: #52290d;
+    border-color: hsl(0, 0%, 8%);
+  }
+  .btn-register:focus{
+    box-shadow:0 0 0 3px #000000;
+  }

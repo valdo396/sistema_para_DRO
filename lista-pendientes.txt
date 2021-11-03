@@ -1,0 +1,16 @@
+
+
+
+
+
+Elementos a entragar en TT2
+---------------------------
+
+1.- Reporte final      [ ]
+2.- Reporte Técnico?   [ ]
+3.- Manual de usuario  [ ]
+4.- Sistema (código)   [ ]
+5.- Presentación       [ ]
+6.- Video demostrativo [ ]
+
+

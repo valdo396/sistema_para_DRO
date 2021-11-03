@@ -40,9 +40,40 @@
         </header>
 
         
+        
+
         <div class="centro">
             <h1>Generar Informes</h1>
+            <form class="form-1">
+                <fieldset>
+                    <legend><strong>Generar informe de responsivas</strong></legend>
+                    
+                        <a>Período: </a>
+                        <input list="tipos" class="lista" placeholder="Seleccionar período">
+                        <datalist id="tipos" >
+                            <option>20xx- </option>
+                            <option>199x- </option>
+                            <option>198x- </option>
+                        </datalist><br>
+
+                        <a>Grupo :_  </a>                    
+                        <input list="tipos" class="lista" placeholder="Seleccionar un grupo">
+                        <datalist id="tipos" >
+                            <option> ----- </option>
+                        </datalist>   <br>
+                    
+                        <a class="radio-1">Incluir responsivas vencidas</a>
+                        <input type="radio" class="radio-2" >  <br>
+                    
+                        <a class="radio-1">Datos complementarios</a>
+                        <input type="radio" class="radio-2" >  
+                    
+                    <button class="boton-informe" type="submit">Generar informe</button>
+                    
+                </fieldset>
+            </form>
             <div class="cont-centro">
+                
                 <embed src="resource/pdf/prueba.pdf" type="application/pdf" width="100%" height="600px"/>
 
 

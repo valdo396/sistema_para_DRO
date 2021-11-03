@@ -7,7 +7,7 @@
   
 body{
     min-height: 100vh;
-    background-color:midnightblue;
+    background-color:mintcream;
 }
   
 .letra-capit { text-transform: capitalize;}   
@@ -25,13 +25,14 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 80px;
+    padding: 6px 24px;
     transition: 0.6s;
+    background-color: #85000D;
 }
 
 header.down{
-  background: #1483D5;
-  padding: 15px 80px;
+  background-color:#f75969c0;
+  padding: 2px 8px;
 }
 
 .brand{
@@ -76,7 +77,7 @@ header.down{
 
 .menu a:hover{
   color: #000;
-  background-color: rgb(162, 155, 236) ;
+  background-color: rgb(204, 147, 133) ;
 }
 
 .section-two{
@@ -84,7 +85,7 @@ header.down{
 }
 
 .btn{
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-size: 25px;
   cursor: pointer;
   display: none;
@@ -92,7 +93,7 @@ header.down{
 
 @media (max-width: 991px){
   header, header.down{
-  	padding: 20px 40px;
+  	padding: 20px 20px;
   }
   .btn{
     display: block;
@@ -100,7 +101,7 @@ header.down{
 
   .menu{
     position: fixed;
-    background:#1483D5;
+    background-color:#a01848;
     min-width: 330px;
     height: 100vh;
     top: 0;
@@ -155,7 +156,9 @@ header.down{
     padding: 60px 0 30px 0;
     margin: auto;
     overflow: hidden;
-    height: 20%;    
+    height: 10%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
 
 }
 
@@ -165,22 +168,26 @@ header.down{
     justify-content: space-evenly;
     margin: auto;
     padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #24B805;
+    border-radius: 30px;
 }
 
 .content-foo{
-    text-align: center;
+    text-align: center;    
 }
 
 .content-foo h4{
     color: #fff;
-    border-bottom: 3px solid #e2429a;
+    border-bottom: 3px solid #D5061A;
+    border-radius: 60px;
     padding-bottom: 5px;
     margin-bottom: 5px;
+    
 }
 
 .content-foo p{
     color: #ccc;
+    
 }
 
 .titulo-final{

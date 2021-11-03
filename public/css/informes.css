@@ -1,12 +1,14 @@
-
+*{
+    color: whitesmoke;
+}
 
 
 h1{
     font-size: 16px;
     width: 90%;
     font-size: 25px;
-
-    margin: 110px auto;
+    color: whitesmoke;
+    margin-top: 100px;
     padding-left: 2%;
     text-align: center;
 }
@@ -43,4 +45,43 @@ h1{
     justify-content: center;
     align-items: center;
     
+}
+
+.form-1{
+    margin-top: 50px;
+    background-color: rgba(128, 124, 123, 0.788);
+    width: 95%;
+    border-radius: 40px;
+    padding: 25px;
+    align-items: flex-end;
+}
+
+fieldset {
+    border-radius: 41px;
+    padding: 20px;
+}
+
+.form-1 a{
+    padding: 15px;
+    width: 50%;
+}
+
+.lista{
+    width: 500px;
+}
+
+.form-1 input{
+    padding: 5px;
+    text-align: center;
+    width: 50%;
+}
+
+.radio-2{
+    align-items: initial;
+}
+
+.boton-informe{
+    background-color: rgb(42, 143, 38);
+    width: 100px;
+    margin-left: 900px;
 }
