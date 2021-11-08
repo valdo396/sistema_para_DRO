@@ -208,70 +208,190 @@ app.get('/inicio', (req, res) => {
 });
 
 app.get('/responsivas', (req, res) => {
-	if (req.session.loggedin) {
-		res.render('responsivas.ejs', {
-			login: true,
-			name: req.session.name
-		});
-	} else {
-		res.render('index.ejs', {
-			login: false,
-			name: 'Debe iniciar sesión',
+	connection.query('select * from propietario;',(error,results)=>{
+		if(error){
+			throw error;
+		}else{
+			if (req.session.loggedin) {
+				results.forEach(element => console.log(element.nombre));
+				//console.log("results= ",results[0].email_usuario);
+				res.render('responsivas.ejs', {
+					results:results,
+					login: true,
+					name: req.session.name
+					
+				});
+			} else {
+				res.render('index.ejs', {
+					login: false,
+					name: 'Debe iniciar sesión',
+				});
+			}
+			res.end();
+		}
+	})
+});
+// Recuperacion de datos del formulario responsivas
+app.post('/responsivas',(req,res)=>{
+	const nombre = req.body.nombre;
+	const emision= req.body.emision;
+	const vigencia = req.body.vigencia;
+	const periodo = req.body.periodo;
+	const cp = req.body.cp;
+	const calle = req.body.calle;
+	const exterior = req.body.exterior;
+	const interior = req.body.interior;
+	const colonia = req.body.colonia;
+	const alcaldia = req.body.alcaldia;
+	const catastro = req.body.catastro;
+	const tipos = req.body.tipos;
+	const manifes = req.body.manifes;
+	const licencias = req.body.licencias;
+	const uso = req.body.uso;
+	const m_predio = req.body.m_predio;
+	const m_responsiva = req.body.m_responsiva;
+	const snb = req.body.snb;
+	const sotanos = req.body.sotanos;
+	const viviendas = req.body.viviendas;
+	const cajones = req.body.cajones;
+	const conservacion = req.body.conservacion;
+	const estaciones = req.body.estaciones;
+	const antenas = req.body.antenas;
+	const observaciones = req.body.observaciones;
+	
+	const razon = req.body.razon;
+	const propietario = req.body.propietario;
+	const prop_apellido_1 = req.body.prop_apellido_1;
+	const prop_apellido_2 = req.body.prop_apellido_2;
+
+	const telefono = req.body.telefono;
+	const rfc = req.body.rfc;
+	global.relacion_propietario=" ";
+
+	/*
+	console.log(nombre);
+	console.log(vigencia);
+	console.log(periodo);
+	console.log(cp);
+	console.log(calle);
+	console.log(exterior);
+	console.log(interior);
+	console.log(colonia);
+	console.log(alcaldia);
+	console.log(catastro);
+	console.log(tipos);
+	console.log(manifes);
+	console.log(licencias);
+	console.log(uso);
+	console.log(m_predio);
+	console.log(m_responsiva);
+	console.log(snb);
+	console.log(sotanos);
+	console.log(viviendas);
+	console.log(cajones);
+	console.log(sotanos);
+	console.log(conservacion);
+	console.log(estaciones);
+	console.log(antenas);
+	console.log(observaciones);
+	
+	console.log(razon);
+	console.log(propietario);
+	console.log(prop_apellido_1);
+	console.log(prop_apellido_2);
+	
+	console.log(telefono);
+	console.log(rfc);
+	*/
+	
+	//---------------------------------insertar datos en 1er tabla "propietario"----------------------------------------
+	if(razon.length != 0){
+		console.log("Insert en Razon social");
+		connection.query('INSERT INTO propietario SET ? ', {
+			razon:razon,
+			telefono:telefono,// campo de la BD : dato del formulario (Fun)
+			rfc:rfc,
+			resp_grupo:periodo
+		},async (error, results) => {
+			if (error) {
+				console.log(error);
+			} else {
+				console.log("1 record inserted");
+			}
 		});
 	}
-	res.end();
-});
+	else{
+		console.log("insert en persona fisica");
+		connection.query('INSERT INTO propietario SET ? ', {
+			nombre: propietario,
+			primer_apellido: prop_apellido_1,
+			segundo_apellido: prop_apellido_2,
+			telefono:telefono,// campo de la BD : dato del formulario (Fun)
+			rfc:rfc,
+			resp_grupo:periodo
+		}, async (error, results) => {
+			if (error) {
+				console.log(error);
+			} else {
+				console.log("1 record inserted");
+				var sql = "SELECT COUNT(*) as total FROM usuarios";
+				var query = connection.query(sql, function(err, result) {
+					relacion_propietario=result[0].total;
+					console.log("Total Records D: " + relacion_propietario);	
+				});
+			}
+	
+		});
+	}
+	//---------------------------------insertar datos en 1er tabla "predio"----------------------------------------
+	//datos a entrar 
+	/*
+	
+	*/
+	//Consultar el indice antes de insertar en la segunda tabla predio
+	
+	
+	console.log("Total Records F: " + relacion_propietario);
 
-// Recuperacion de datos del formulario responsivas
-app.post('/registro', async (req, res) => {
-	
-	
-	/*
-	//const user = req.body.user;
-	//const pass = req.body.pass;
-	const nombre = req.body.nombre;
-	const apellido_1 = req.body.apellido_1;
-	const apellido_2 = req.body.apellido_2;
-	const correo = req.body.correo;
-	const clave = req.body.password;
-	const registro = req.body.registro;
-	/*
-	console.log("Nombre= "+nombre);
-	console.log("Apellido_1= "+apellido_1);
-	console.log("Apellido_2= "+apellido_2);
-	console.log("Correo= "+correo);
-	console.log("Clave= "+clave);
-	console.log("Registro= "+registro);
-	
-	let passwordHaash = await bcryptjs.hash(clave, 8);// encriptar la clave password del formulario
-	connection.query('INSERT INTO usuarios SET ?', {
-		//user:nombre, //pasamos el usuario del formulario
-		//password: pass
-		//pass:passwordHaash, //de esta forma la contraseña esta encriptada
-		//agregar los demas parametros
-		num_registro: registro,
-		email_usuario: correo,
-		password: passwordHaash,
-		nombre: nombre,
-		primer_apellido: apellido_1,
-		segundo_apellido: apellido_2*/
-	}, async (error, results) => {
+	connection.query('INSERT INTO predio SET ? ', {
+		calle:calle,
+		num_interior:interior,
+		num_exterior:exterior,
+		superficie_predio:m_predio,
+		niveles_snb:snb,
+		niveles_bnb:sotanos,
+		colonia:colonia,
+		alcaldia:alcaldia,
+		cp:cp,
+		viviendas:viviendas,
+		cajones:cajones,
+		altura_soporte:estaciones,
+		antenas:antenas,
+		longitud_instalacion_subt:'-',
+		resp_grupo:periodo,
+		id_propietario:relacion_propietario
+	},async (error, results) => {
 		if (error) {
 			console.log(error);
 		} else {
-			res.render('registro.ejs', {
-				alert: true,
-				alertTitle: "Registro",
-				alertMenssage: "Registro exitoso !",
-				alertIcon: 'success',
-				showConfirmButton: false,
-				timer: 1500,
-				ruta: ''
-			})
+			console.log("1 record inserted");
 		}
+	});
 
-	//}); // conection Query
-})
+	
+
+});
+
+// pagina de terminos y condiciones
+app.get('/terminos',(req,res)=>{
+	res.render('terminos.ejs');
+});
+
+
+
+
+
+
 
 
 app.get('/consultas', (req, res) => {

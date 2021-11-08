@@ -107,6 +107,23 @@ values
 SELECT * FROM observaciones;
 
 
+desc propietario;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| id_propietario   | int         | NO   | PRI | NULL    | auto_increment |
+| nombre           | varchar(15) | YES  |     | NULL    |                |
+| primer_apellido  | varchar(10) | YES  |     | NULL    |                |
+| segundo_apellido | varchar(10) | YES  |     | NULL    |                |
+| telefono         | varchar(10) | YES  |     | NULL    |                |
+| rfc              | varchar(13) | YES  | UNI | NULL    |                |
+| resp_grupo       | int         | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+
+INSERT INTO propietario SET ?
+INSERT INTO propietario (nombre,primer_apellido,segundo_apellido,telefono,rfc,resp_grupo) 
+VALUES ('nombre','ape1','ape2','tel','rfc',1)
+
 --------------------------------------------------------------------------------------------------------
 Consultas cruzadas de tabla tipo_tramte y observaciones;
 
@@ -130,3 +147,52 @@ FROM observaciones as o INNER JOIN tipo_tramite as t ON o.resp_grupo = t.resp_gr
 UPDATE observaciones
 SET resp_grupo=2 WHERE id_observaciones=1;
 
+DELETE FROM propietario;
+
+---------------------------------------------------------------
+
+ALTER TABLE propietario
+ADD razon  VARCHAR(300) NULL;
+
+ALTER TABLE propietario
+MODIFY COLUMN razon VARCHAR(90) NULL;
+
+ALTER TABLE propietario DROP COLUMN resp_grupo;
+
+ALTER TABLE propietario
+ADD resp_grupo  VARCHAR(30) NULL;
+
+
+ALTER TABLE propietario
+MODIFY COLUMN nombre VARCHAR(40) NULL;
+
+ALTER TABLE propietario
+MODIFY COLUMN primer_apellido VARCHAR(40) NULL;
+
+ALTER TABLE propietario
+MODIFY COLUMN segundo_apellido VARCHAR(40) NULL;
+
+ALTER TABLE propietario
+MODIFY COLUMN telefono VARCHAR(14) NULL;
+
+ALTER TABLE propietario
+MODIFY COLUMN rfc VARCHAR(13) NULL;
+
+ALTER TABLE propietario
+DROP rfc;
+
+ALTER TABLE propietario
+ADD rfc  VARCHAR(13) NULL;
+
+ALTER TABLE predio
+MODIFY COLUMN niveles_snb VARCHAR(10) NULL;
+
+SELECT COUNT(*) FROM usuarios;
+
+select email_usuario from usuarios;
+
+INSERT INTO propietario(nombre,resp_grupo)
+VALUES
+('Osvaldo','2018/01'),
+('Nadia','2018/02'),
+('Axel','2019/01');

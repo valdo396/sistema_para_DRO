@@ -4,6 +4,11 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
+.ocultar{
+    display: none;
+}
+
+
 /*
 
 .entrada > p,
@@ -48,11 +53,7 @@ form > legend{
     width: 90%;
     margin: 110px auto;
     font-size: 20px;
-    
-    display: grid;
-    grid-template-rows: auto auto auto;
-    align-items: center;
-    
+        
     /*display: flex;
     flex-wrap: wrap;
     flex-direction: column;*/
@@ -60,33 +61,6 @@ form > legend{
 }
 
 
-.form-1{
-    background-color: rgb(215, 216, 243);
-    border-radius: 3px;
-    color: rgb(83, 83, 83);
-    font-size: 0.8em;
-    padding: 10px;
-    margin: 0 auto;
-    width: 50%;
-}
-.form-2{
-    background-color: rgb(215, 216, 243);
-    border-radius: 3px;
-    color: rgb(83, 83, 83);
-    font-size: 0.8em;
-    padding: 10px;
-    margin: 0 auto;
-    width: 50%;
-}
-.form-3{
-    background-color: rgb(215, 216, 243);
-    border-radius: 3px;
-    color: rgb(83, 83, 83);
-    font-size: 0.8em;
-    padding: 10px;
-    margin: 0 auto;
-    width: 50%;
-}
 
 .input-entrada{
     color: rgb(83, 83, 83);
@@ -164,3 +138,326 @@ input textarea{
 .boton-enviar:active{
 	background-color: #29962A;
 }
+
+
+.botones_radio input[type="radio"]{
+    display: none;
+}
+
+.radio > label{
+    color: brown;
+    padding: 5px 15px 5px 51px;
+    display: inline-block;
+    position: relative;
+    font-size: 1em;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.radio > label:hover{
+    background-color: burlywood;
+}
+
+.radio > label:before{
+    content: "";
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    background-color:none;
+    border: 3px solid #18A383;
+    border-radius: 50%;
+    position: absolute;
+    left: 17px;
+    top: 4px;
+}
+
+.botones_radio input[type="radio"]:checked + label{
+    padding: 5px 15px;
+    background-color: #18A383;
+    border-radius: 2px;
+    color: #fff;
+}
+
+.botones_radio input[type="radio"]:checked + label:before{
+    display: none;
+}
+
+
+legend{
+  text-align: center;
+}
+
+.formulario {
+    margin: auto;
+    width: 60%;
+    background-color:#678580;
+    border-radius: 30px;
+
+    grid-template-areas:
+    "a"
+    "b"
+    "c"
+    "d";
+    gap:20px;
+
+  
+
+  padding: 5px;
+  
+
+}
+
+.grupo-1{
+    grid-area: a;
+    align-self: center;
+    justify-self: center;
+}
+.grupo-2{
+    grid-area: b;
+}
+.grupo-3{
+    grid-area: c;
+}
+.grupo-4{
+    grid-area: d;
+}
+
+.grupo-1,
+.grupo-2,
+.grupo-3,
+.grupo-4{
+    margin: auto;
+    width: 95%;
+    padding: 20px;
+}
+
+.grupo_domicilio{
+    
+    margin: auto;
+    width: 99.5%;
+    padding: 2px;
+    padding-top: 2px;
+    
+}
+
+.formulario__grupo_terminos:hover{
+  background-color:#97a09f;
+  border-radius: 30px;
+}
+
+
+
+
+
+.formulario__grupo{
+  background-color:#93aaa6;
+  padding: 2px;
+  border-radius: 30px;  
+}
+
+.formulario__label {
+	display: block;
+	font-weight: 700;
+	padding: 7px;
+	cursor: pointer;
+}
+
+.formulario__grupo-input {
+	position: relative;
+}
+
+.formulario__input {
+	width: 100%;
+	background: #fff;
+	border: 3px solid transparent;
+	height: 45px;
+	line-height: 45px;
+	padding: 0px 0px 0 10px;
+	transition: .3s ease all;
+    border-radius: 30px;  
+
+}
+
+
+
+.formulario__input:focus {
+	border: 3px solid #0075FF;
+	outline: none;
+	box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
+}
+
+.formulario__input-error {
+	font-size: 13px;
+	font-weight: bolder;
+	margin-top: 0;
+	margin-bottom: 15px;
+	display: none;
+	padding: 5px;
+}
+
+.formulario__input-error-activo {
+	display: block;
+}
+
+/*
+.formulario__ojo__izquierda {
+    width: 200px;
+    height: 20px;
+    padding-right: 50px;
+}
+
+.formulario__ojo__derecha {
+    margin-left: -50px;
+    height: 25px;
+    width: 50px;
+    background: blue;
+    color: white;
+    border: 0;
+    -webkit-appearance: none;
+}
+*/
+
+
+
+
+.formulario__validacion-estado {
+	position: absolute;
+	right: 10px;
+	bottom: 15px;
+	z-index: 100;
+	font-size: 16px;
+	opacity: 0;
+}
+
+.formulario__checkbox {
+	margin-right: 10px;
+}
+
+.formulario__grupo-terminos, 
+.formulario__mensaje,
+.formulario__grupo-btn-enviar {
+	grid-column: span 2;
+}
+
+.formulario__mensaje {
+	height: 45px;
+	line-height: 45px;
+	background: #F66060;
+	padding: 0 15px;
+	border-radius: 3px;
+	display: none;
+}
+
+.formulario__mensaje-activo {
+	display: block;
+}
+
+.formulario__mensaje p {
+	margin: 0;
+}
+
+.formulario__grupo-btn-enviar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.formulario__btn {
+	height: 45px;
+	line-height: 45px;
+	width: 99%;
+	background: #000;
+	color: #fff;
+	font-weight: bold;
+	border: none;
+	border-radius: 30px;
+	cursor: pointer;
+	transition: .1s ease all;
+}
+
+.formulario__btn:hover {
+	box-shadow: 3px 0px 30px rgba(163,163,163, 1);
+}
+
+.formulario__mensaje-exito {
+	font-size: 14px;
+	color: #119200;
+	display: none;
+}
+
+.formulario__mensaje-exito-activo {
+	display: block;
+}
+
+/* ----- -----  Estilos para Validacion ----- ----- */
+.formulario__grupo-correcto .formulario__validacion-estado {
+	color: #1ed12d;
+	opacity: 1;
+}
+
+.formulario__grupo-incorrecto .formulario__label {
+	color: #bb2929;
+}
+
+.formulario__grupo-incorrecto .formulario__validacion-estado {
+	color: #bb2929;
+	opacity: 1;
+}
+
+.formulario__grupo-incorrecto .formulario__input {
+	border: 3px solid #bb2929;
+}
+
+
+/* ----- -----  Mediaqueries ----- ----- */
+@media screen and (max-width: 800px) {
+	.formulario {
+		grid-template-columns: 1fr;
+    background-color: orangered;
+	}
+
+	.formulario__grupo-terminos, 
+	.formulario__mensaje,
+	.formulario__grupo-btn-enviar {
+		grid-column: 1;
+	}
+
+	.formulario__btn {
+		width: 100%;
+	}
+}
+
+.a_terminos{
+
+	color:#000;
+}
+
+.a_terminos:hover{
+	color: rgb(46, 104, 28);
+}
+
+.gap{
+	padding: 5px;
+	gap: 10px;
+}
+
+.cancelar{
+	text-align: center;
+	width: 75%;
+	text-decoration: none;
+}
+
+.cancelar:hover{
+	color: #be3636;
+}
+
+.enviar:hover{
+	color: #47b347;
+}
+
+/*Nuevos estilos y JS*/
+
+

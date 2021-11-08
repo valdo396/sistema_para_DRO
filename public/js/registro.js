@@ -1,5 +1,6 @@
 const formulario = document.getElementById('formulario');
-const inputs = document.querySelectorAll('#formulario input');
+const newLocal = '#formulario input';
+const inputs = document.querySelectorAll(newLocal);
 
 const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -24,6 +25,7 @@ const campos = {
 
 
 const validarFormulario = (e) => {
+	console.log("e.taget.name: "+e.target.name);
 	switch (e.target.name) {
 		case "nombre":
 			validarCampo(expresiones.nombre, e.target, 'nombre');
@@ -51,6 +53,7 @@ const validarFormulario = (e) => {
 		
 		case "registro":
 			validarCampo(expresiones.registro, e.target, 'registro');
+			//document.getElementById('enviar').disabled = false;
 		break;
 	}
 }
@@ -117,6 +120,8 @@ formulario.addEventListener('submit', (e) => {
 	
 	if(campos.nombre && campos.apellido_1 && campos.apellido_2 && campos.password && campos.correo && campos.registro && terminos.checked ){
 		//formulario.reset();
+		
+		
 
 		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
 		
