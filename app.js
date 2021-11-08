@@ -78,6 +78,14 @@ app.post('/registro', async (req, res) => {
 	const correo = req.body.correo;
 	const clave = req.body.password;
 	const registro = req.body.registro;
+	
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
+	}
+	const num_id = getRandomInt(1,9999);
+	
+	
+
 	/*
 	console.log("Nombre= "+nombre);
 	console.log("Apellido_1= "+apellido_1);
@@ -92,6 +100,7 @@ app.post('/registro', async (req, res) => {
 		//password: pass
 		//pass:passwordHaash, //de esta forma la contraseña esta encriptada
 		//agregar los demas parametros
+		id_usuario:num_id,
 		num_registro: registro,
 		email_usuario: correo,
 		password: passwordHaash,
@@ -266,10 +275,14 @@ app.post('/responsivas',(req,res)=>{
 
 	const telefono = req.body.telefono;
 	const rfc = req.body.rfc;
-	global.relacion_propietario=" ";
 
-	/*
-	console.log(nombre);
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
+	}
+	const num_id = getRandomInt(1,9999);
+	console.log(num_id);
+	//global.relacion_propietario=" ";
+	/*console.log(nombre);
 	console.log(vigencia);
 	console.log(periodo);
 	console.log(cp);
@@ -294,20 +307,21 @@ app.post('/responsivas',(req,res)=>{
 	console.log(estaciones);
 	console.log(antenas);
 	console.log(observaciones);
-	
 	console.log(razon);
 	console.log(propietario);
 	console.log(prop_apellido_1);
 	console.log(prop_apellido_2);
-	
 	console.log(telefono);
 	console.log(rfc);
-	*/
+	console.log(num_id);*/
+
+	
 	
 	//---------------------------------insertar datos en 1er tabla "propietario"----------------------------------------
 	if(razon.length != 0){
 		console.log("Insert en Razon social");
 		connection.query('INSERT INTO propietario SET ? ', {
+			id_propietario:num_id,
 			razon:razon,
 			telefono:telefono,// campo de la BD : dato del formulario (Fun)
 			rfc:rfc,
@@ -323,6 +337,7 @@ app.post('/responsivas',(req,res)=>{
 	else{
 		console.log("insert en persona fisica");
 		connection.query('INSERT INTO propietario SET ? ', {
+			id_propietario:num_id,
 			nombre: propietario,
 			primer_apellido: prop_apellido_1,
 			segundo_apellido: prop_apellido_2,
@@ -334,11 +349,11 @@ app.post('/responsivas',(req,res)=>{
 				console.log(error);
 			} else {
 				console.log("1 record inserted");
-				var sql = "SELECT COUNT(*) as total FROM usuarios";
+				/*var sql = "SELECT COUNT(*) as total FROM usuarios";
 				var query = connection.query(sql, function(err, result) {
 					relacion_propietario=result[0].total;
 					console.log("Total Records D: " + relacion_propietario);	
-				});
+				});*/
 			}
 	
 		});
@@ -351,9 +366,10 @@ app.post('/responsivas',(req,res)=>{
 	//Consultar el indice antes de insertar en la segunda tabla predio
 	
 	
-	console.log("Total Records F: " + relacion_propietario);
+	//console.log("Total Records F: " + relacion_propietario);
 
 	connection.query('INSERT INTO predio SET ? ', {
+		id_predio:num_id,
 		calle:calle,
 		num_interior:interior,
 		num_exterior:exterior,
@@ -369,7 +385,7 @@ app.post('/responsivas',(req,res)=>{
 		antenas:antenas,
 		longitud_instalacion_subt:'-',
 		resp_grupo:periodo,
-		id_propietario:relacion_propietario
+		id_propietario:num_id
 	},async (error, results) => {
 		if (error) {
 			console.log(error);
@@ -377,7 +393,68 @@ app.post('/responsivas',(req,res)=>{
 			console.log("1 record inserted");
 		}
 	});
-
+	//---------------------------------insertar datos en 1er tabla "Vigencia"----------------------------------------
+	connection.query('INSERT INTO vigencia SET ? ', {
+		id_vigencia:num_id,
+		expedicion:emision,
+		vencimiento:vigencia,
+		resp_grupo:periodo
+	},async (error, results) => {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log("INSERT INTO VIGENCIA");
+		}
+	});
+	//---------------------------------insertar datos en 1er tabla "tipo_tramite"----------------------------------------
+	connection.query('INSERT INTO tipo_tramite SET ? ', {
+		id_tipo_tramite:num_id,
+		manifestacion:manifes,
+		licencia:licencias,
+		otra_resp:tipos,
+		resp_grupo:periodo
+	},async (error, results) => {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log("INSERT INTO Tipo de tramite");
+		}
+	});
+	//---------------------------------insertar datos en 1er tabla "observaciones"----------------------------------------
+	connection.query('INSERT INTO observaciones SET ? ', {
+		id_observaciones:num_id,
+		descripcion:observaciones,
+		resp_grupo:periodo,
+		id_tipo_tramite:num_id
+	},async (error, results) => {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log("INSERT INTO observaciones");
+		}
+	});
+	//---------------------------------insertar datos en 1er tabla "responsiva"----------------------------------------
+	connection.query('INSERT INTO responsiva SET ? ', {
+		id_responsiva:num_id,
+		nombre:nombre,
+		superficie_responsiva:m_responsiva,
+		num_catastral:catastro,
+		uso:uso,
+		area_patrimonial:conservacion,
+		uso_de_suelo:'-',
+		resp_grupo:periodo,
+		id_usuario:767,//agregar el id de la tabla con la consulta de variable de sesion para crear la relacion 
+		id_vigencia:num_id,
+		id_tipo_tramite:num_id,
+		id_predio:num_id,
+		id_observaciones:num_id
+	},async (error, results) => {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log("INSERT INTO Responsiva");
+		}
+	});
 	
 
 });

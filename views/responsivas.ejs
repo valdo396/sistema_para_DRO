@@ -81,9 +81,9 @@
                         <div class="formulario__grupo-input">
                             <input list="lis" type="text" class="formulario__input" name="periodo" id="periodo" placeholder="Ingresar período" >
                             <datalist id="lis">
-                                <% results.forEach((element,index) => { %>
+                                <% results.forEach((element)=> { %>
                                 <option><%= element.resp_grupo%> </option>
-                                <% }) %>
+                                <% }); %>
                             </datalist>
                             
                             <i class="formulario__validacion-estado fas fa-times-circle"></i>

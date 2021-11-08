@@ -2,7 +2,7 @@ mysql> describe usuarios;
 +------------------+--------------+------+-----+---------+----------------+
 | Field            | Type         | Null | Key | Default | Extra          |
 +------------------+--------------+------+-----+---------+----------------+
-| id_usuario       | int          | NO   | PRI | NULL    | auto_increment |
+| id_usuario       | int          | NO   | PRI | NULL    |  |
 | num_registro     | int          | YES  | UNI | NULL    |                |
 | email_usuario    | varchar(20)  | YES  | UNI | NULL    |                |
 | nombre           | varchar(15)  | YES  |     | NULL    |                |
@@ -25,7 +25,7 @@ mysql> describe responsiva;
 +-----------------------+--------------+------+-----+---------+----------------+
 | Field                 | Type         | Null | Key | Default | Extra          |
 +-----------------------+--------------+------+-----+---------+----------------+
-| id_responsiva         | int          | NO   | PRI | NULL    | auto_increment |
+| id_responsiva         | int          | NO   | PRI | NULL    |  |
 | nombre                | varchar(50)  | YES  |     | NULL    |                |
 | folio                 | varchar(10)  | YES  |     | NULL    |                |
 | superficie_responsiva | varchar(10)  | YES  |     | NULL    |                |
@@ -54,7 +54,7 @@ mysql> describe vigencia;
 +-------------+----------+------+-----+---------+----------------+
 | Field       | Type     | Null | Key | Default | Extra          |
 +-------------+----------+------+-----+---------+----------------+
-| id_vigencia | int      | NO   | PRI | NULL    | auto_increment |
+| id_vigencia | int      | NO   | PRI | NULL    |  |
 | expedicion  | datetime | YES  |     | NULL    |                |
 | vencimiento | datetime | YES  |     | NULL    |                |
 +-------------+----------+------+-----+---------+----------------+
@@ -72,7 +72,7 @@ desc tipo_tramite;
 +-----------------+-------------+------+-----+---------+----------------+
 | Field           | Type        | Null | Key | Default | Extra          |
 +-----------------+-------------+------+-----+---------+----------------+
-| id_tipo_tramite | int         | NO   | PRI | NULL    | auto_increment |
+| id_tipo_tramite | int         | NO   | PRI | NULL    |  |
 | manifestacion   | varchar(12) | YES  |     | NULL    |                |
 | licencia        | varchar(85) | YES  |     | NULL    |                |
 | otra_resp       | varchar(30) | YES  |     | NULL    |                |
@@ -91,7 +91,7 @@ desc observaciones;
 +------------------+--------------+------+-----+---------+----------------+
 | Field            | Type         | Null | Key | Default | Extra          |
 +------------------+--------------+------+-----+---------+----------------+
-| id_observaciones | int          | NO   | PRI | NULL    | auto_increment |
+| id_observaciones | int          | NO   | PRI | NULL    |  |
 | descripcion      | varchar(100) | YES  |     | NULL    |                |
 | resp_grupo       | int          | YES  |     | NULL    |                |
 | id_tipo_tramite  | int          | NO   | MUL | NULL    |                |
@@ -111,7 +111,7 @@ desc propietario;
 +------------------+-------------+------+-----+---------+----------------+
 | Field            | Type        | Null | Key | Default | Extra          |
 +------------------+-------------+------+-----+---------+----------------+
-| id_propietario   | int         | NO   | PRI | NULL    | auto_increment |
+| id_propietario   | int         | NO   | PRI | NULL    |  |
 | nombre           | varchar(15) | YES  |     | NULL    |                |
 | primer_apellido  | varchar(10) | YES  |     | NULL    |                |
 | segundo_apellido | varchar(10) | YES  |     | NULL    |                |
@@ -139,6 +139,9 @@ FROM observaciones as o INNER JOIN tipo_tramite as t ON o.id_tipo_tramite = t.id
 
 SELECT  o.id_observaciones, o.descripcion, t.manifestacion, t.licencia, t.otra_resp
 FROM observaciones as o INNER JOIN tipo_tramite as t ON o.resp_grupo = t.resp_grupo;
+
+SELECT pre.cp, pre.calle, pre.colonia, pro.nombre, pro.rfc, pre.id_propietario, pro.id_propietario
+FROM predio as pre INNER JOIN propietario as pro ON pre.id_propietario = pro.id_propietario;
 
 
 ------------------------------------
@@ -196,3 +199,15 @@ VALUES
 ('Osvaldo','2018/01'),
 ('Nadia','2018/02'),
 ('Axel','2019/01');
+
+
+
+ALTER TABLE propietario CHANGE id_propietario id_propietario INT UNSIGNED NOT NULL;
+
+select * from propietario;
+select * from predio;
+select * from observaciones;
+select * from tipo_tramite;
+select * from vigencia;
+select * from responsiva;
+select * from usuarios;

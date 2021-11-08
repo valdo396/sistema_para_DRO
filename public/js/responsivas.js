@@ -10,11 +10,11 @@ const expresiones = {
 	vigencia:/^(198[5-9]|199[0-9]|20[0-9]{2})\-(0[1-9]|1[1-2])\-(0[1-9]|[1-2][0-9]|3[0-1])/,//Fechas desde 1984 a 2099
 	periodo:/^(198[5-9]|199[0-9]|20[0-9]{2})\/(0[1-9]|[1-9][0-9])$/, // Período iniciando por el año/numero concecutivo 01 a 99
 	cp:/^[0-9]{5}$/, // 5 número restringir al itervalo de la CDMX.
-	calle:/^[À-ÿ\w\s\#]{5,40}$/, // 40 letras para la calle
+	calle:/^[À-ÿ\w\s\#\.]{5,40}$/, // 40 letras para la calle
 	exterior:/^\d{1,5}$/, // 1 a 5 números.
 	interior:/^\d{1,5}$/, // 1 a 5 números.
 	colonia:/[a-zA-ZÀ-ÿ\s\d\-]{1,5}$/, // Letras, tíldes, espacios, numeros, y guión medio 
-	alcaldia:/^[Aa]zcapotzalco|[AaÁá]lvaro [Oo]breg[óo]n|[Bb]enito [jJ]u[aá]rez|[Cc]oyoac[aá]n|[Cu]uajimalpa de [Mm]orelos|[cC]uauht[ée]moc|[gg]ustavo A. [Mm]adero|[Ii]ztacalco|[Ii]ztapalapa|[mM]agdalena [Cc]ontreras|[mM]iguel [Mm]idalgo|[Mm]ilpa [tT]lta|[Tt]lalpan|[Tt]l[áa]huac|[vV]enustiano [cC]arranza|[xX]ochimilco$/, // alcaldias
+	alcaldia:/^[Aa]zcapotzalco|[AaÁá]lvaro [Oo]breg[óo]n|[Bb]enito [jJ]u[aá]rez|[Cc]oyoac[aá]n|[Cu]uajimalpa de [Mm]orelos|[cC]uauht[ée]moc|[gG]ustavo A\. [Mm]adero|[Ii]ztacalco|[Ii]ztapalapa|[mM]agdalena [Cc]ontreras|[mM]iguel [Mm]idalgo|[Mm]ilpa [tT]lta|[Tt]lalpan|[Tt]l[áa]huac|[vV]enustiano [cC]arranza|[xX]ochimilco$/, // alcaldias
 	catastro:/^(([0-9]{3}\-[0-9]{3}\-[0-9]{2}\-[0-9]{3}\-[0-9]{1,2})|([0-9]{3}\-[0-9]{3}\-[0-9]{2}\-[0-9]{3})|([0-9]{12} *))$/, // 123-123-12-123-1
 	tipos:/^Manifestaci[óo]n tipo "[BbCc]"|ESPECIALES y OTRAS RESPONSIVAS$/, // 1 a 5 números.
 	manifes:/^No aplica|Obra nueva|Ampliación|Modificación|Reparación|Barda \(mayor de 2\.50 m\. de altura\)|Prórroga\, \(indicar \% avance\)|Uso y ocupación$/, // 1 a 5 números.
@@ -29,7 +29,7 @@ const expresiones = {
 	conservacion:/^S[Ii]|si|N[Oo]|no$/, // Si o No
 	estaciones:/^\d{1,5}$/, // 1 a 5 números.
 	antenas:/^\d{1,5}$/, // 1 a 5 números.
-	observaciones:/^[\w\s.,d[\]{}()ñÑ]{1,500}$/, // 1 a 500 letras, números, puntos, comas, [], {}, () ñ y Ñ
+	observaciones:/^[\#\%\w\s.,d[\]{}()ñÑ]{1,500}$/, // 1 a 500 letras, números, puntos, comas, [], {}, () ñ y Ñ
 	razon:/^[a-zA-ZÀ-ÿ\s]{3,90}$/, // Letras y espacios, pueden llevar acentos.
 	propietario:/^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
 	prop_apellido_1:/^[a-zA-ZÀ-ÿ\s]{4,40}$/, // Letras y espacios, pueden llevar acentos.
