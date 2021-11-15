@@ -5,7 +5,7 @@ const radio_nombre = document.getElementById("hombre");
 const radio_mujer = document.getElementById("mujer");
 
 const expresiones = {
-	nombre: /^[a-zA-ZÀ-ÿ\s]{5,100}$/, // Letras y espacios, pueden llevar acentos.
+	nombre: /^[a-zA-ZÀ-ÿ\s\d\-\:\.\!]{5,100}$/, // Letras y espacios, pueden llevar acentos.
 	emision: /^(198[5-9]|199[0-9]|20[0-9]{2})\-(0[1-9]|1[1-2])\-(0[1-9]|[1-2][0-9]|3[0-1])/,//Fechas desde 1984 a 2099
 	vigencia:/^(198[5-9]|199[0-9]|20[0-9]{2})\-(0[1-9]|1[1-2])\-(0[1-9]|[1-2][0-9]|3[0-1])/,//Fechas desde 1984 a 2099
 	periodo:/^(198[5-9]|199[0-9]|20[0-9]{2})\/(0[1-9]|[1-9][0-9])$/, // Período iniciando por el año/numero concecutivo 01 a 99
@@ -18,7 +18,7 @@ const expresiones = {
 	catastro:/^(([0-9]{3}\-[0-9]{3}\-[0-9]{2}\-[0-9]{3}\-[0-9]{1,2})|([0-9]{3}\-[0-9]{3}\-[0-9]{2}\-[0-9]{3})|([0-9]{12} *))$/, // 123-123-12-123-1
 	tipos:/^Manifestaci[óo]n tipo "[BbCc]"|ESPECIALES y OTRAS RESPONSIVAS$/, // 1 a 5 números.
 	manifes:/^No aplica|Obra nueva|Ampliación|Modificación|Reparación|Barda \(mayor de 2\.50 m\. de altura\)|Prórroga\, \(indicar \% avance\)|Uso y ocupación$/, // 1 a 5 números.
-	licencias:/^No aplica|Edificaciones en suelo de conservación|Estaciones repetidoras de comunicación celular o inalámbrica|Instalaciones subterráneas o aéreas en la vía pública|Demolición|Excavaciones o cortes cuya profundidad sea mayor de 1m|Tapiales que invadan la acera en una medida superior a 0\.5 m|Obras o instalaciones temporales|Instalaciones o modificaciones en edificaciones existentes\(ascensores\, escaleras mecánicas\)$/, // 1 a 5 números.
+	licencias:/^No aplica|Edificaciones en suelo de conservación|Estaciones repetidoras de comunicación celular o inalámbrica|Instalaciones subterráneas o aéreas en la vía pública|Demolición|Excavaciones o cortes cuya profundidad sea mayor de 1m|Tapiales que invadan la acera en una medida superior a 0\.5 m|Obras o instalaciones temporales|Instalaciones o modificaciones en edificaciones existentes\(ascensores\, escaleras mecánicas\)|Registro de obra ejecutada|Licencia de anuncio|Const\. de Seg\. Estructural|Vo\. Bo\. de Seg\. y Operaci\ón|Desmantelamiento|Aviso de terminación de obra|Otros \(en observaciones\)$/, // 1 a 5 números.
 	uso:/^[\w\s.,[\]{}()ñÑ]{1,500}$/, // 1 a 500 letras, números, puntos, comas, [], {}, () ñ y Ñ
 	m_predio:/^\d{1,6}$/, // 1 a 5 números.
 	m_responsiva:/^\d{1,10}$/, // 1 a 5 números.
@@ -36,7 +36,6 @@ const expresiones = {
 	prop_apellido_2:/^[a-zA-ZÀ-ÿ\s]{4,40}$/, // Letras y espacios, pueden llevar acentos.
 	telefono: /^\d{7,14}$/, // 7 a 14 números.
 	rfc:/^([A-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]))((-)?([A-Z\d]{3}))?$/,
-	nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
 	password: /^.{4,12}$/, // 4 a 12 digitos.
 	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	
@@ -51,20 +50,21 @@ const expresiones = {
 
 function moral() {
 	console.log("Persona Moral");
-	document.getElementById("razon").classList.remove('ocultar');
-	document.getElementById("propietario").classList.add('ocultar');
-	document.getElementById("prop_apellido_1").classList.add('ocultar');	
-	document.getElementById("prop_apellido_2").classList.add('ocultar');
+	document.getElementById("grupo__razon").classList.remove('ocultar');
+	document.getElementById("grupo__propietario").classList.add('ocultar');
+	document.getElementById("grupo__prop_apellido_1").classList.add('ocultar');	
+	document.getElementById("grupo__prop_apellido_2").classList.add('ocultar');
 }
 
 function fisica() {
 	console.log("Persona Fisica");	
-	document.getElementById("propietario").classList.remove('ocultar');
-	document.getElementById("prop_apellido_1").classList.remove('ocultar');	
-	document.getElementById("prop_apellido_2").classList.remove('ocultar');
-	document.getElementById("razon").classList.add('ocultar');
+	document.getElementById("grupo__propietario").classList.remove('ocultar');
+	document.getElementById("grupo__prop_apellido_1").classList.remove('ocultar');	
+	document.getElementById("grupo__prop_apellido_2").classList.remove('ocultar');
+	document.getElementById("grupo__razon").classList.add('ocultar');
 }
 
+//Funcion para convertir mayusculas todo lo que se tenga Input RFC
 function mayus(e) {
     var tecla=e.value;
     var tecla2=tecla.toUpperCase();
@@ -73,19 +73,44 @@ function mayus(e) {
 	
 
 //document.getElementById('enviar').disabled = false;
-
 const campos = {
 	nombre: false,
-	apellido_1: false,
-	apellido_2: false,
-	password: false,
-	correo: false,
-	registro: false
+	emision: false,
+	vigencia: false,
+	periodo: false,
+	cp: false,
+	calle: false,
+	exterior: false,
+	interior: false,
+	alcaldia: false,
+	colonia: false,
+	catastro: false,
+	tipos: false,
+	manifes: false,
+	licencias: false,
+	uso: false,
+	m_predio: false,
+	m_responsiva: false,
+	snb: false,
+	sotanos: false,
+	viviendas: false,
+	cajones: false,
+	conservacion: false,
+	estaciones: false,
+	antenas: false,
+	observaciones: false,
+	razon: false,
+	propietario: false,
+	prop_apellido_1: false,
+	prop_apellido_2: false,
+	telefono: false,
+	rfc: false,
+	ubicacion:false
 }
 
 
 const validarFormulario = (e) => {
-	console.log(e.target.name);
+	//console.log(e.target.name);
     switch (e.target.name) {
 		case "nombre":
 			validarCampo(expresiones.nombre, e.target, 'nombre');
@@ -234,26 +259,97 @@ const validarCampo = (expresion, input, campo) => {
 	}
 }
 
-
+function foco(idElemento){
+	document.getElementById(idElemento).focus();
+}
 
 inputs.forEach((input) => {
 	input.addEventListener('keyup', validarFormulario);
 	input.addEventListener('blur', validarFormulario);
 });
 
-
-formulario.addEventListener('submit', (e) => {
-	//e.preventDefault();
+function enviar_formulario(){
+	if(campos.nombre==true ){
+		if(campos.emision==true){
+			if(campos.vigencia==true){
+				//&& campos.apellido_1 && campos.apellido_2 && campos.password && campos.correo && campos.registro
+				//formulario.reset();
+				document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
+				setTimeout(() => {
+					document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+					formulario.reset();
+				}, 5000);
+				
+				document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
+					icono.classList.remove('formulario__grupo-correcto');
+				});
+			}
+			else{
+				document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
+			document.getElementById('mensaje_bot').innerText='Error: Hay un campo invalido';
+			setTimeout(() => {
+				document.getElementById('mensaje_bot').innerText='Buscando, espere...3';
+				setTimeout(() => {
+					document.getElementById('mensaje_bot').innerText='Mostrando error, espere...2';
+					setTimeout(() => {
+						document.getElementById('mensaje_bot').innerText='Erro: La fecha de vigencia es incorrecta';
+						setTimeout(() => {
+							document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
+							foco('vigencia');
+						}, 1500);
+					}, 1500);
+				}, 1500);
+			}, 1500);
+			}
+		}else{
+			document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
+			document.getElementById('mensaje_bot').innerText='Error: Hay un campo invalido';
+			setTimeout(() => {
+				document.getElementById('mensaje_bot').innerText='Buscando, espere...3';
+				setTimeout(() => {
+					document.getElementById('mensaje_bot').innerText='Mostrando error, espere...2';
+					setTimeout(() => {
+						document.getElementById('mensaje_bot').innerText='Erro: La fecha de emisión es incorrecta';
+						setTimeout(() => {
+							document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
+							foco('emision');
+						}, 1500);
+					}, 1500);
+				}, 1500);
+			}, 1500);
+		}
+	} else {
+		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
+		document.getElementById('mensaje_bot').innerText='Error: Hay un campo invalido';
+		setTimeout(() => {
+			document.getElementById('mensaje_bot').innerText='Buscando, espere...3';
+			setTimeout(() => {
+				document.getElementById('mensaje_bot').innerText='Mostrando error, espere...2';
+				setTimeout(() => {
+					document.getElementById('mensaje_bot').innerText='Error: El nombre es incorrecto espere...1';
+					setTimeout(() => {
+						document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
+						foco('nombre');
+					}, 1500);
+				}, 1500);
+			}, 1500);
+		}, 1500);
+	}
 	/*
-	const terminos = document.getElementById('terminos');
-	
-	if(campos.nombre && campos.apellido_1 && campos.apellido_2 && campos.password && campos.correo && campos.registro && terminos.checked ){
+	document.formulario1.submit()
+	console.log("FORMULARIO ENVIADO");
+	setTimeout(() => {
+		document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+		formulario.reset();
+	}, 5000);
+	*/
+}
+/*
+formulario.addEventListener('submit', (e) => {
+	e.preventDefault();
+	if(campos.nombre && campos.apellido_1 && campos.apellido_2 && campos.password && campos.correo && campos.registro){
 		//formulario.reset();
-		
-		
-
 		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
-		
 		setTimeout(() => {
 			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
 			formulario.reset();
@@ -264,5 +360,6 @@ formulario.addEventListener('submit', (e) => {
 		});
 	} else {
 		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
-	}*/
+	}
 });
+*/

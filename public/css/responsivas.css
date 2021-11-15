@@ -4,9 +4,6 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-.ocultar{
-    display: none;
-}
 
 
 /*
@@ -52,7 +49,7 @@ form > legend{
 .centro{
     width: 90%;
     margin: 110px auto;
-    font-size: 20px;
+    font-size: 14px;
         
     /*display: flex;
     flex-wrap: wrap;
@@ -265,9 +262,7 @@ legend{
 	cursor: pointer;
 }
 
-.formulario__grupo-input {
-	position: relative;
-}
+
 
 .formulario__input {
 	width: 100%;
@@ -461,3 +456,11 @@ legend{
 /*Nuevos estilos y JS*/
 
 
+.form-archivo{
+    display: flex;
+    font-size:15px;
+}
+
+.ocultar{
+    display: none;
+}

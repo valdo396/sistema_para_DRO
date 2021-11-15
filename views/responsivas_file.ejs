@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsivas</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="resource/img/alexcgdesign.png" type="image/x-icon">
+    <link rel="stylesheet" href="resource/css/style2.css">
+    <link rel="stylesheet" href="resource/css/responsivas_file.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <div class="contenedor-principal">
+        <header>
+            <a href="#" class="brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+                    <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z"/>
+                  </svg>
+            </a>
+            <nav class="menu">
+              <div class="btn">
+                <i class="fas fa-times close-btn"></i>
+              </div>
+              <ul>
+                  <a href="/inicio">Inicio</a>
+                  <a href="/responsivas">Registrar Responsivas</a>
+                  <a href="/consultas">Consultas</a>
+                  <a href="/informes">Informes</a>
+                  <a href="/reglamento">Leyes y Reglamentos</a>
+                  <a href="/logout">Cerrar sesión</a>
+              </ul>
+            </nav>
+            <div class="btn">
+              <i class="fas fa-bars menu-btn"></i>
+            </div>
+        </header>
+
+        
+        <div class="centro">    
+            <div class="lista_responsivas">
+                <table class="tabla_p" id="tabla" name="tabla">
+                    <tr class="tabla_h">
+                        <td>Estado</td>
+                        <td>Propietario</td>
+                        <td>Vigencia</td>
+                        <td>Emisión</td>
+                        <td>Número catastral</td>
+                    </tr>
+                    <% try{ %>
+                        <% for(let i=0;i<informe[0].length;i++) { %> 
+                            <tr class="tabla_cont" id="tabla_<%=i%>" name="tabla_<%=i%>"><!--resource/img/check-square-fill.svg-->
+                            <td id="fila_<%=i%>" name="fila_<%=i%>"><img id="img_<%=i%>" name="img_<%=i%>" src="resource/img/x-square-fill.svg" width="60" height="30"><br>Pendiente</td>
+                            <td id="nombre_cliente" name="nombre_cliente" ><%= informe[47][i]; %> </td>
+                            <td><%= informe[1][i]; %> </td>
+                            <% if(informe[2][i]=="NaN-aN-aN"){ %>
+                                <td><%= informe[2][i]='-'; %> </td>
+                            <% }else{ %>
+                                <td><%= informe[2][i]; %> </td>
+                            <% } %>
+                            <td><%= informe[4][i]; %> </td>
+                        <% } %>
+                    </tr>
+                    <% }catch(e){} %>
+                   
+                </table>
+            </div>
+            <input id="informe" name="informe" value="<%= informe %>" hidden>
+            <% const lim_sup =informe[0].length;%>
+            <% let aux=[]%>
+            <% for(let i=0;i<lim_sup;i++){%>
+                <% for(let j=0;j<49;j++){%>
+                    <% aux.push(informe[j][i]);%>
+                <% }%>
+                <input id="resp_<%=i%>" name="resp_<%=i%>" value="<%= aux %>" hidden>
+                <% aux = []; %>
+            <% } %>
+            <legend><strong> Ingresar nueva responsiva con archivo </strong></legend><br/><br/> 
+            <form action="responsivas" class="formulario" id="formulario" name="formulario2" method="POST">
+                <legend><strong> Datos de la responsiva </strong></legend>
+                <div class="grupo-1">
+                    <!-- Grupo: Nombre de la responsiva -->
+                    <div class="formulario__grupo" id="grupo__nombre">
+                        <label for="nombre" class="formulario__label">Nombre de la responsiva</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input" name="nombre" id="nombre" placeholder="Nombre" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 5 a 10 letras, puede contener 'numeros' y '/' </p>
+                    </div>
+    
+                    <!-- Grupo: Primer emision -->
+                    <div class="formulario__grupo" id="grupo__emision">
+                        <label for="emision" class="formulario__label">Fecha de emisión</label>
+                        <div class="formulario__grupo-input">
+                            <input type="date" class="formulario__input" name="emision" id="emision" placeholder="Dia/Mes/Año" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+    
+                    <!-- Grupo: Segundo apellido -->
+                    <div class="formulario__grupo" id="grupo__vigencia">
+                        <label for="vigencia" class="formulario__label">Vigencia</label>
+                        <div class="formulario__grupo-input">
+                            <input type="date" class="formulario__input" name="vigencia" id="vigencia" placeholder="Dia/Mes/Año" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 dígitos y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <!-- Grupo: periodo -->
+                    <div class="formulario__grupo" id="grupo__periodo">
+                        <label for="periodo" class="formulario__label">Período</label>
+                        <div class="formulario__grupo-input">
+                            <input list="lis" type="text" class="formulario__input" name="periodo" id="periodo" placeholder="Ingresar período" >
+                            <datalist id="lis">
+                                <% results.forEach((element)=> { %>
+                                <option><%= element.resp_grupo%> </option>
+                                <% }); %>
+                            </datalist>
+                            
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 dígitos y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                </div><!--Grupo 1-->
+
+                <div class="grupo-2">
+                    <legend><strong> Ubicación del predio </strong></legend>
+                    <!-- Grupo: ubicacion-->
+                    <div class="formulario__grupo" id="grupo__ubicacion">
+                        <label for="catastro" class="formulario__label">Dirección</label>
+                        <div class="grupo_ubicacion formulario__grupo-input">
+                            <input type="text" class="ubicacion_input formulario__input" name="ubicacion" id="ubicacion" placeholder="Dirección" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <div class="formulario__grupo" id="grupo__catastro">
+                        <label for="catastro" class="formulario__label">Cuenta Catastral</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input" name="catastro" id="catastro" placeholder="123-456-78-" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    
+                </div><!--Grupo 2-->
+
+                <div class="grupo-3">
+                    <!-- Grupo: Nombre de la responsiva -->
+                    <legend><strong> Detalles de la resposiva </strong></legend>
+                    
+                    <!-- Grupo:Tipos de resposivas  -->
+                    <div class="formulario__grupo" id="grupo__tipos">
+                        <label for="tipos" class="formulario__label">Tipo</label>
+                        <div class="formulario__grupo-input">
+                            <input list="lis_tipos" type="text" class="formulario__input" name="tipos" id="tipos" placeholder="Seleccione ---" >
+                            <datalist id="lis_tipos" >
+                                <option>Manifestación tipo "B" </option>
+                                <option>Manifestación tipo "C" </option>
+                                <option> ESPECIALES y OTRAS RESPONSIVAS</option>
+                            </datalist>
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <!-- Grupo:Tipos de resposivas  -->
+                    <div class="formulario__grupo" id="grupo__manifes">
+                        <label for="manifes" class="formulario__label">Manifestación tipo "B" ó "C"</label>
+                        <div class="formulario__grupo-input">
+                            <input list="lis_manifes" type="text" class="formulario__input" name="manifes" id="manifes" placeholder="Seleccione ---" >
+                            <datalist id="lis_manifes" >
+                                <option>No aplica</option>
+                                <option>Obra nueva</option>
+                                <option>Ampliación</option>
+                                <option>Modificación</option>
+                                <option>Reparación</option>
+                                <option>Barda (mayor de 2.50 m. de altura)</option>
+                                <option>Prórroga, (indicar % avance)</option>
+                                <option>Uso y ocupación</option>
+                            </datalist>  
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <!-- Grupo:Tipos de resposivas  -->
+                    <div class="formulario__grupo" id="grupo__licencias">
+                        <label for="licencias" class="formulario__label">Licencia de construcción especial</label>
+                        <div class="formulario__grupo-input">
+                            <input list="lis_licencias" type="text" class="formulario__input" name="licencias" id="licencias" placeholder="Seleccione ---" >
+                            <datalist id="lis_licencias">
+                                <option>No aplica</option>
+                                <option>Edificaciones en suelo de conservación</option>
+                                <option>Estaciones repetidoras de comunicación celular o inalámbrica</option>
+                                <option>Instalaciones subterráneas o aéreas en la vía pública</option>
+                                <option>Demolición</option>
+                                <option>Excavaciones o cortes cuya profundidad sea mayor de 1m</option>
+                                <option>Tapiales que invadan la acera en una medida superior a 0.5 m</option>
+                                <option>Obras o instalaciones temporales</option>
+                                <option>Instalaciones o modificaciones en edificaciones existentes(ascensores, escaleras mecánicas)</option>
+                                <option>Registro de obra ejecutada</option>
+                                <option>Licencia de anuncio</option>
+                                <option>Const. de Seg. Estructural</option>
+                                <option>Vo. Bo. de Seg. y Operación</option>
+                                <option>Desmantelamiento</option>
+                                <option>Aviso de terminación de obra</option>
+                                <option>Otros (en observaciones)</option>
+                            </datalist>
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                     <!-- Grupo: uso -->
+                     <div class="formulario__grupo" id="grupo__uso">
+                         <label for="uso" class="formulario__label">Destino de la Edificación</label>
+                         <div class="formulario__grupo-input">
+                             <input type="text" class="formulario__input" name="uso" id="uso" placeholder="Describir el uso del inmueble" >
+                             <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                         </div>
+                         <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                     </div>
+                     <!-- Grupo: m_predio -->
+                     <div class="formulario__grupo" id="grupo__m_predio">
+                        <label for="m_predio" class="formulario__label">Superficies</label>
+                        <div class="formulario__grupo-input">
+                            <input type="number" class="formulario__input" name="m_predio" id="m_predio" placeholder="Del predio m2" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>      
+                    <!-- Grupo: m_responsiva -->
+                    <div class="formulario__grupo" id="grupo__m_responsiva">
+                        <div class="formulario__grupo-input">
+                            <input type="number" class="formulario__input" name="m_responsiva" id="m_responsiva" placeholder="De la responsiva m2" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>            
+                    <!-- Grupo: SNB -->
+                    <div class="formulario__grupo" id="grupo__snb">
+                        <label for="snb" class="formulario__label">Número de niveles</label>
+                        <div class="formulario__grupo-input">
+                            <input type="number" class="formulario__input" name="snb" id="snb" placeholder="Sobre nivel de banqueta" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <!-- Grupo: Sotanos -->
+                    <div class="formulario__grupo" id="grupo__sotanos">
+                        <div class="formulario__grupo-input">
+                            <input type="number" class="formulario__input" name="sotanos" id="sotanos" placeholder="Sotantos" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                     <!-- Grupo: Nombre de la responsiva -->
+                     <div class="formulario__grupo" id="grupo__viviendas">
+                        <label for="viviendas" class="formulario__label">Número de viviendas</label>
+                        <div class="formulario__grupo-input">
+                            <input type="number" class="formulario__input" name="viviendas" id="viviendas" placeholder="Ingresa el número" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <!-- Grupo: Nombre de la responsiva -->
+                    <div class="formulario__grupo" id="grupo__cajones">
+                        <label for="cajones" class="formulario__label">Número de Cajones de Estacionamiento</label>
+                        <div class="formulario__grupo-input">
+                            <input type="number" class="formulario__input" name="cajones" id="cajones" placeholder="Ingresa el número" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <!-- Grupo:Tipos de resposivas  -->
+                    <div class="formulario__grupo" id="grupo__conservacion">
+                        <label for="conservacion" class="formulario__label">Area de Conservacion Patrimonial o Histórica</label>
+                        <div class="formulario__grupo-input">
+                            <input list="s/n" type="text" class="formulario__input" name="conservacion" id="conservacion" placeholder="Seleccione ---" >
+                            <datalist id="s/n">
+                                <option>Si </option>
+                                <option>No </option>
+                            </datalist>
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                     <!-- Grupo: Nombre de la responsiva -->
+                     <div class="formulario__grupo" id="grupo__estaciones">
+                        <label for="estaciones" class="formulario__label">Estaciones Repetidoras</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input" name="estaciones" id="estaciones" placeholder="Estaciones Repetidoras" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <!-- Grupo: antenas -->
+                    <div class="formulario__grupo" id="grupo__antenas">
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input" name="antenas" id="antenas" placeholder="Número de Antenas" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <!-- Grupo: Nombre de la responsiva -->
+                    <div class="formulario__grupo" id="grupo__observaciones">
+                        <label for="observaciones" class="formulario__label">Observaciones</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input" name="observaciones" id="observaciones" placeholder="(en su caso avance de obra %, si se cuenta con autorización de uso y ocupación así manifestarlo)" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                    <!-- Grupo: Propietario -->
+                    <div class="formulario__grupo" id="grupo__propietario">
+                        <label for="propietario" class="formulario__label">Propietario</label>
+                        <div class="formulario__grupo-input">
+                            <input type="text" class="formulario__input" name="propietario" id="propietario" placeholder="Propietario" >
+                            <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                        </div>
+                        <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
+                    </div>
+                </div><!--Grupo-3-->
+                <div class="formulario__grupo formulario__grupo-btn-enviar gap">
+                    <input type="button" onclick="enviar_formulario()" class="formulario__btn enviar" id="enviar" value="Enviar" >
+                    <a  class="formulario__btn cancelar" href="/">Cancelar</a>
+                    <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
+                </div>
+            </form>
+        </div><!--Div Centro-->
+        <div class="footer">
+            <div class="contenedor-footer">
+                <div class="content-foo">
+                    <h4>Phone</h4>
+                    <p>8296312</p>
+                </div>
+                <div class="content-foo">
+                    <h4>Email</h4>
+                    <p>8296312</p>
+                </div>
+                <div class="content-foo">
+                    <h4>Location</h4>
+                    <p>8296312</p>
+                </div>
+            </div>
+            <h2 class="titulo-final">&copy;  Design | TT</h2>
+        </div>
+    </div>
+    <script src="resource/js/responsivas_file.js"></script>
+    <script src="resource/js/responsivas.js"></script>
+    <script src="resource/js/menu.js"></script>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+</body>
+</html>
+

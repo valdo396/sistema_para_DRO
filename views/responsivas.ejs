@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="shortcut icon" href="resource/img/alexcgdesign.png" type="image/x-icon">
     <link rel="stylesheet" href="resource/css/style2.css">
-    <link rel="stylesheet" href="resource/css/responsivas.css">
+    <link rel="stylesheet" href="resource/css/responsivas_file.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
@@ -41,9 +42,13 @@
         </header>
 
         
-        <div class="centro">
-            <legend><strong> Ingresar nueva responsiva </strong></legend><br/><br/> 
-            <form action="responsivas" class="formulario" id="formulario" method="POST">
+        <div class="centro">    
+            <form class="formulario form-archivo" action="/files" method="post" enctype="multipart/form-data">
+                <input class="formulario__input" type="file" id="avatar" name="avatar" accept=".xlsx">
+                <button class="formulario__btn cancelar" type="submit" >Enviar archivo</button>
+            </form>       
+            <legend><strong> Ingresar nueva responsiva con archivo </strong></legend><br/><br/> 
+            <form action="responsivas" class="formulario" id="formulario" name="formulario2" method="POST">
                 <legend><strong> Datos de la responsiva </strong></legend>
                 <div class="grupo-1">
                     <!-- Grupo: Nombre de la responsiva -->
@@ -221,6 +226,13 @@
                                 <option>Tapiales que invadan la acera en una medida superior a 0.5 m</option>
                                 <option>Obras o instalaciones temporales</option>
                                 <option>Instalaciones o modificaciones en edificaciones existentes(ascensores, escaleras mecánicas)</option>
+                                <option>Registro de obra ejecutada</option>
+                                <option>Licencia de anuncio</option>
+                                <option>Const. de Seg. Estructural</option>
+                                <option>Vo. Bo. de Seg. y Operación</option>
+                                <option>Desmantelamiento</option>
+                                <option>Aviso de terminación de obra</option>
+                                <option>Otros (en observaciones)</option>
                             </datalist>
                             <i class="formulario__validacion-estado fas fa-times-circle"></i>
                         </div>
@@ -340,35 +352,34 @@
 
                             <i class="formulario__validacion-estado fas fa-times-circle"></i>
                         </div>
-                        
-                        <div class="formulario__grupo" id="grupo__razon">
-                            <label for="razon" class="formulario__label">datos</label>
+                        <!-- Grupo: Razon social -->
+                        <div class="ocultar formulario__grupo" id="grupo__razon">
                             <div class="formulario__grupo-input">
-                                <input type="text" class="ocultar formulario__input" name="razon" id="razon" placeholder="Razón Social" >
+                                <input type="text" class="formulario__input" name="razon" id="razon" placeholder="Razón Social" >
                                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                             </div>
                             <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
                         </div>
                         <!-- Grupo: propietario -->
-                        <div class="formulario__grupo" id="grupo__propietario">
+                        <div class="ocultar formulario__grupo" id="grupo__propietario">
                             <div class="formulario__grupo-input">
-                                <input type="text" class="ocultar formulario__input" name="propietario" id="propietario" placeholder="Nombre">
+                                <input type="text" class="formulario__input" name="propietario" id="propietario" placeholder="Nombre">
                                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                             </div>
                             <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
                         </div>
                         <!-- Grupo: prop_apellido_1 -->
-                        <div class="formulario__grupo" id="grupo__prop_apellido_1">
+                        <div class="ocultar formulario__grupo" id="grupo__prop_apellido_1">
                             <div class="formulario__grupo-input">
-                                <input type="text" class="ocultar formulario__input" name="prop_apellido_1" id="prop_apellido_1" placeholder="Apellido paterno">
+                                <input type="text" class="formulario__input" name="prop_apellido_1" id="prop_apellido_1" placeholder="Apellido paterno">
                                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                             </div>
                             <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
                         </div>
                         <!-- Grupo: prop_apellido_2 -->
-                        <div class="formulario__grupo" id="grupo__prop_apellido_2">
+                        <div class="ocultar formulario__grupo" id="grupo__prop_apellido_2">
                             <div class="formulario__grupo-input">
-                                <input type="text" class="ocultar formulario__input" name="prop_apellido_2" id="prop_apellido_2" placeholder="Apellido materno" >
+                                <input type="text" class="formulario__input" name="prop_apellido_2" id="prop_apellido_2" placeholder="Apellido materno" >
                                 <i class="formulario__validacion-estado fas fa-times-circle"></i>
                             </div>
                             <p class="formulario__input-error">El nombre tiene que ser de 3 a 16 letras y NO puede contener numeros ni caracteres especiales</p>
@@ -395,12 +406,12 @@
                                 ORP830422</p>
                         </div>
                         <div class="formulario__mensaje" id="formulario__mensaje">
-                            <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
+                            <p><i id="mensaje_bot" class="fas fa-exclamation-triangle"></i></p>
                         </div>
                     </div>
                 </div><!--grupo-4-->
                 <div class="formulario__grupo formulario__grupo-btn-enviar gap">
-                    <input type="submit" class="formulario__btn enviar" id="enviar" value="Enviar" >
+                    <input type="button" onclick="enviar_formulario()" class="formulario__btn enviar" id="enviar" value="Enviar" >
                     <a  class="formulario__btn cancelar" href="/">Cancelar</a>
                     <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
                 </div>
@@ -429,3 +440,4 @@
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 </body>
 </html>
+

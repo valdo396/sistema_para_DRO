@@ -211,3 +211,34 @@ select * from tipo_tramite;
 select * from vigencia;
 select * from responsiva;
 select * from usuarios;
+
+
+
+
+//------------------------------------------------------------------------------------------
+
+Entradas para archivo
+
+
+desc propietario
+
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| id_propietario   | int          | NO   | PRI | NULL    |       |
+| razon            | varchar(40)  | YES  |     | NULL    |       |
+| nombre           | varchar(40)  | YES  |     | NULL    |       |
+| primer_apellido  | varchar(40)  | YES  |     | NULL    |       |
+| segundo_apellido | varchar(40)  | YES  |     | NULL    |       |
+| telefono         | varchar(12)  | YES  |     | NULL    |       |
+| rfc              | varchar(13)  | YES  |     | NULL    |       |
+| resp_grupo       | varchar(10)  | YES  |     | NULL    |       |
+| propietario      | varchar(300) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+
+INSERT INTO propietario (id_propietario) 
+VALUES 
+(1),
+(2),
+(3),
+(4);
