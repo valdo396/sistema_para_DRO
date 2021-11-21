@@ -242,3 +242,99 @@ VALUES
 (2),
 (3),
 (4);
+
+INSERT INTO vigencia(id_vigencia,expedicion,resp_grupo) 
+values
+(1,'2000-01-17','2000/01'),
+(2,'2002-01-17','2000/01');
+
+
+///--------------------------------------------------------------------------------------------------------
+                        SALIDAS DE LA BASE DE DATOS DB_2
+
+show tables;
++----------------+
+| Tables_in_db_2 |
++----------------+
+| observaciones  |
+| predio         |
+| propietario    |
+| responsiva     |
+| tipo_tramite   |
+| usuarios       |
+| vigencia       |
++----------------+
+
+SELECT  o.id_observaciones, o.descripcion, t.manifestacion, t.licencia, t.otra_resp
+FROM observaciones as o INNER JOIN tipo_tramite as t ON o.resp_grupo = t.resp_grupo;
+
+SELECT pre.cp, pre.calle, pre.colonia, pro.nombre, pro.rfc, pre.id_propietario, pro.id_propietario
+FROM predio as pre INNER JOIN propietario as pro ON pre.id_propietario = pro.id_propietario;
+
+SELECT u.num_registro, r.nombre, r.num_catastral, r.superficie_responsiva
+FROM usuarios as u INNER JOIN responsiva as r ON u.id_usuario = r.id_usuario;
+
+1478	Aviso de Visto Bueno de seguridad 	567-600-42-000-01	100
+1478	Aviso de  Osvaldo	000000000000	500
+1478	Aviso de Visto Bueno de seguridad 	567-600-42-000-01	100
+14933	HORTENSIO BULMARO	222222222222	2
+1493	VO.BO. DE SEG Y OP. TLALPAN 2192-5-19	153-138-25-000	321.00
+
+o = observaciones;
+pre = predio;
+pro = propietario;
+r = responsiva;
+t = tipo_tramite;
+u = usuarios;
+v = vigencia;
+
+SELECT  [campos consultados]
+FROM [tabla1] as [identif] INNER JOIN [tabla_n] as [identif] ON [id_tabla1]=[id_tabla_n];
+
+SELECT u.num_registro, r.nombre, r.num_catastral, r.superficie_responsiva
+FROM usuarios as u INNER JOIN responsiva as r ON u.id_usuario = r.id_usuario WHERE o.id_usuario = 9319;
+
+SELECT r.nombre, v.expedicion, v.vencimiento, r.num_catastral, u.num_registro, r.superficie_responsiva
+FROM usuarios as u 
+INNER JOIN responsiva as r  ON u.id_usuario = r.id_usuario 
+INNER JOIN vigencia as v  ON v.id_vigencia = r.id_vigencia 
+WHERE u.id_usuario = 9319;
+
+
+SELECT r.nom_r, DATE_FORMAT(v.expedicion, "%d-%m-%Y") AS expe, DATE_FORMAT(v.vencimiento, "%d-%m-%Y") as venci, pre.direccion, r.num_catastral, t.manifestacion, t.licencia, t.otra_resp,
+r.uso, pre.superficie_predio, r.superficie_responsiva, pre.niveles_snb, pre.niveles_bnb, 
+pre.viviendas, pre.cajones, r.uso_de_suelo, r.area_patrimonial, pre.altura_soporte, pre.antenas, pre.longitud_instalacion_subt,
+u.num_registro, pro.propietario, o.descripcion, r.resp_grupo, pro.razon, pro.nom_pro, pro.ape1_pro, pro.ape2_pro,
+pro.telefono, pro.rfc
+FROM usuarios as u 
+INNER JOIN responsiva as r  ON u.id_usuario = r.id_usuario 
+INNER JOIN vigencia as v  ON v.id_vigencia = r.id_vigencia 
+INNER JOIN predio as pre  ON pre.id_predio = r.id_predio 
+INNER JOIN tipo_tramite as t  ON t.id_tipo_tramite = r.id_tipo_tramite 
+INNER JOIN propietario as pro  ON pro.id_propietario = pre.id_propietario
+INNER JOIN observaciones as o  ON o.id_observaciones = r.id_observaciones  
+WHERE u.id_usuario = 9319
+ORDER BY v.expedicion;
+
+
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| id_propietario   | int          | NO   | PRI | NULL    |       |
+| razon            | varchar(200) | YES  |     | NULL    |       |
+| nombre           | varchar(40)  | YES  |     | NULL    |       |
+| primer_apellido  | varchar(40)  | YES  |     | NULL    |       |
+| segundo_apellido | varchar(40)  | YES  |     | NULL    |       |
+| telefono         | varchar(12)  | YES  |     | NULL    |       |
+| rfc              | varchar(13)  | YES  |     | NULL    |       |
+| resp_grupo       | varchar(10)  | YES  |     | NULL    |       |
+| propietario      | varchar(300) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+ALTER TABLE propietario
+CHANGE nom_prop nom_pro VARCHAR(80) NULL;
+ALTER TABLE propietario
+CHANGE ape1_proP ape1_pro VARCHAR(80) NULL;
+ALTER TABLE propietario
+CHANGE ape2_proP ape2_pro VARCHAR(80) NULL;
+
+Select DATE_FORMAT(expedicion, "%d-%m-%Y"), DATE_FORMAT(vencimiento, "%d-%m-%Y") from vigencia;

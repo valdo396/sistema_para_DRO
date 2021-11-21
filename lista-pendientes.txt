@@ -14,3 +14,25 @@ Elementos a entragar en TT2
 6.- Video demostrativo [ ]
 
 
+
+<table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+	<tr>
+		<td style="background-color: #ecf0f1">
+			<div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
+				<h2 style="text-align: center; background-color: #AD0011; color: #fff; margin: 0 0 7px">Sistema de gestión administrativa de apoyo a las funciones de un Director Responsable de Obra en la CDMX.</h2>
+				<p style="color: #000; margin: 25px; font-size: 16px">
+					Estimado(a) Osvaldo Saavedra:
+                  <br><br> Has introducido valdo318@hotmail.com como correo electrónico de contacto. Para completar el proceso, debemos verificar que esa dirección de correo electrónico te pertenece. Basta con que pulses verificar e inicies sesión en el sistema.
+                  <br><br></p>
+               <p style="text-align: center;">Dar click en el enlace para verificar la cuenta
+                </p>
+				
+				
+				<div style="width: 100%; text-align: center">
+					<a style="text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db" href="https://www.facebook.com/PokemonTrujillo/">Verificar</a>	
+				</div>
+              <p style="color: #b3b3b3; font-size: 12px; text-align: center;margin: 30px 0 0">Desing from TT 2020-B055</p>
+			</div>
+		</td>
+	</tr>
+</table>

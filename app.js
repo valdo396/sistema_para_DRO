@@ -51,11 +51,28 @@ const multer = require('multer');
 */
 app.get('/login', (require, response) => {
 	response.render('login.ejs');
+});
+//Crear el modulo para enviar emails
+const nodemailer = require('nodemailer');
+let transporter = nodemailer.createTransport({
+	host: "smtp.gmail.com",
+	port: 465,
+	secure: true, // true for 465, false for other ports
+	auth: {
+		user: 'valdo314@gmail.com', // generated ethereal user
+		pass: 'jmyboxrbzuwbnyzl', // generated ethereal password
+	},
+});
+transporter.verify().then(()=>{
+	console.log("Listo para enviar emails");
 })
-app.get('/registro', (require, response) => {
+app.get('/registro', async(require, response) => {
 	response.render('registro.ejs');
 })
 
+
+  
+const token='i6xHd1BRjBSCU8PvQ0FUAqL4sP1KTjqPtmBSskuEhFwF1kLZxd';
 // 10- Registro de usuarios
 app.post('/registro', async (req, res) => {
 	//const user = req.body.user;
@@ -107,11 +124,40 @@ app.post('/registro', async (req, res) => {
 				showConfirmButton: false,
 				timer: 1500,
 				ruta: ''
-			})
+			});
+			await transporter.sendMail({
+				from: '"VERIFICACIÓN DE USUARIO ✔✔" <valdo314@gmail.com>', //
+				to: correo, //
+				subject: "Correo para verificar usuario", // 
+				html: `
+				<table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+					<tr>
+						<td style="background-color: #ecf0f1">
+							<div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
+								<h2 style="text-align: center; background-color: #AD0011; color: #fff; margin: 0 0 7px">Sistema de gestión administrativa de apoyo a las funciones de un Director Responsable de Obra en la CDMX.</h2>
+								<p style="color: #000; margin: 25px; font-size: 16px">
+									Estimado(a) ${nombre} ${apellido_1}:
+								<br><br> Has introducido ${correo} como correo electrónico de contacto. Para completar el proceso, debemos verificar que esa dirección de correo electrónico te pertenece. Basta con que pulses verificar e inicies sesión en el sistema.
+								<br><br></p>
+								<p style="text-align: center;">Dar click en el enlace para verificar la cuenta</p>
+								<div style="width: 100%; text-align: center">
+									<a style="text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db" href="http://localhost:3000/${token}">Verificar</a>	
+								</div>
+								<p style="text-align: center;">El código espirara en 60min.</p>
+								<p style="color: #b3b3b3; font-size: 12px; text-align: center;margin: 30px 0 0">Desing from TT 2020-B055</p>
+							</div>
+						</td>
+					</tr>
+				</table>
+				`, // html body
+			});
 		}
 
 	});
-})
+});
+app.get(`/${token}`,async(req,res)=>{
+	res.render('verificacion');
+});
 
 
 
@@ -256,56 +302,16 @@ app.post('/responsivas',(req,res)=>{
 	const estaciones = req.body.estaciones;
 	const antenas = req.body.antenas;
 	const observaciones = req.body.observaciones;
-	
 	const razon = req.body.razon;
 	const propietario = req.body.propietario;
 	const prop_apellido_1 = req.body.prop_apellido_1;
 	const prop_apellido_2 = req.body.prop_apellido_2;
-
 	const telefono = req.body.telefono;
 	const rfc = req.body.rfc;
-
 	function getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min)) + min;
 	}
 	const num_id = getRandomInt(1,9999);
-	//console.log(num_id);
-	//global.relacion_propietario=" ";
-	/*console.log(nombre);
-	console.log(vigencia);
-	console.log(periodo);
-	console.log(cp);
-	console.log(calle);
-	console.log(exterior);
-	console.log(interior);
-	console.log(colonia);
-	console.log(alcaldia);
-	console.log(catastro);
-	console.log(tipos);
-	console.log(manifes);
-	console.log(licencias);
-	console.log(uso);
-	console.log(m_predio);
-	console.log(m_responsiva);
-	console.log(snb);
-	console.log(sotanos);
-	console.log(viviendas);
-	console.log(cajones);
-	console.log(sotanos);
-	console.log(conservacion);
-	console.log(estaciones);
-	console.log(antenas);
-	console.log(observaciones);
-	console.log(razon);
-	console.log(propietario);
-	console.log(prop_apellido_1);
-	console.log(prop_apellido_2);
-	console.log(telefono);
-	console.log(rfc);
-	console.log(num_id);*/
-
-	
-	
 	//---------------------------------insertar datos en 1er tabla "propietario"----------------------------------------
 	if(razon.length != 0){
 		console.log("Insert en Razon social");
@@ -327,9 +333,9 @@ app.post('/responsivas',(req,res)=>{
 		console.log("insert en persona fisica");
 		connection.query('INSERT INTO propietario SET ? ', {
 			id_propietario:num_id,
-			nombre: propietario,
-			primer_apellido: prop_apellido_1,
-			segundo_apellido: prop_apellido_2,
+			nom_pro: propietario,
+			ape1_pro: prop_apellido_1,
+			ape2_pro: prop_apellido_2,
 			telefono:telefono,// campo de la BD : dato del formulario (Fun)
 			rfc:rfc,
 			resp_grupo:periodo
@@ -338,25 +344,12 @@ app.post('/responsivas',(req,res)=>{
 				console.log(error);
 			} else {
 				console.log("1 record inserted");
-				/*var sql = "SELECT COUNT(*) as total FROM usuarios";
-				var query = connection.query(sql, function(err, result) {
-					relacion_propietario=result[0].total;
-					console.log("Total Records D: " + relacion_propietario);	
-				});*/
 			}
 	
 		});
 	}
 	//---------------------------------insertar datos en 1er tabla "predio"----------------------------------------
-	//datos a entrar 
-	/*
-	
-	*/
-	//Consultar el indice antes de insertar en la segunda tabla predio
-	
-	
 	//console.log("Total Records F: " + relacion_propietario);
-
 	connection.query('INSERT INTO predio SET ? ', {
 		id_predio:num_id,
 		calle:calle,
@@ -425,7 +418,7 @@ app.post('/responsivas',(req,res)=>{
 	//---------------------------------insertar datos en 1er tabla "responsiva"----------------------------------------
 	connection.query('INSERT INTO responsiva SET ? ', {
 		id_responsiva:num_id,
-		nombre:nombre,
+		nom_r:nombre,
 		superficie_responsiva:m_responsiva,
 		num_catastral:catastro,
 		uso:uso,
@@ -444,8 +437,6 @@ app.post('/responsivas',(req,res)=>{
 			console.log("INSERT INTO Responsiva");
 		}
 	});
-	
-
 });
 
 // pagina de terminos y condiciones
@@ -520,6 +511,7 @@ function obtenerDatos(ws){
 	const av=[];
 	const aw=[];
 	const ax=[];
+	const ay=[];
 
 	try { // declaraciones para try
 		nombre_resp.push(ws.B9.v);
@@ -1914,6 +1906,28 @@ function obtenerDatos(ws){
 		//console.log("Terminado");
 		//logMyErrors(e); // pasar el objeto exception al controlador de errores (es decir, su propia función)
 	}
+	try{// ay estado
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+		ay.push("Pendiente");
+	}catch(e){}
 	
 	//console.log(ws.AX9.w);
 	responsivas.push(nombre_resp);
@@ -1965,63 +1979,14 @@ function obtenerDatos(ws){
 	responsivas.push(av);
 	responsivas.push(aw);
 	responsivas.push(ax);
+	responsivas.push(ay);
 
 	//responsivas.forEach(element => console.log(element));
 	return responsivas;
-	transmite = responsivas;
-	
 	//nombre_resp.forEach(element => console.log(element));
 	//vigencia_resp.forEach(element => console.log(element));
 }
-
-async function consulta(){
-	let lista=[];
-	connection.query('select * from propietario',(error,results_1)=>{
-		if(error){
-			throw error;
-		}else{
-			for(let i=0;i<results_1.length;i++){
-				lista.push(results_1[i].id_propietario);
-				console.log("Lista== "+lista);
-			}
-			return results_1;
-		}
-	});
-	console.log("results_1= ",results_1);
-	await console.log("SalidaFC== ",lista);
-	return lista;
-}
-
-async function valida_R(valida){
-	const lista = [1,2,3];
-	
-	const control = await connection.query('SELECT * FROM propietario');
-	console.log(control);
-	if(control.length==''){
-		console.log("Control vale cero");
-	}
-	for(let i=0;i<control.length;i++){
-		lista.push(control[i].id_propietario);
-		console.log("Lista: "+lista);
-	}
-	await console.log("Lista= ",lista);
-
-	
-	/*
-	if(valida==control[i].id_propietario){
-		valida=valida+1;
-		console.log("A validar: "+valida);
-	}*/
-	console.log("Salida: "+valida);
-	return valida;
-}
-// Retorna un número aleatorio entre min (incluido) y max (excluido)
-function gRA(min, max) {
-	let salida = Math.random() * (max - min) + min;
-	salida = parseInt(salida);
-	
-	return salida;
-}
+let contador=[];
 //Archivos
 app.post('/files', upload.single('avatar') ,async (req,res)=>{
 	const xlsx = require('xlsx');
@@ -2031,61 +1996,157 @@ app.post('/files', upload.single('avatar') ,async (req,res)=>{
 	const wbs = wb.SheetNames;
 	const ws = wb.Sheets[wbs[0]];
 	const informe = obtenerDatos(ws);
-
-	
-	
-	//prueba= await valida_R(prueba);
-	//console.log("campo validado= "+prueba);
-	/*
-	for(let i=0;i<informe[0].length;i++) {
-		//informe[0][i];//[0]nombre de la fila i
-		//informe[1][i];//[1]emision de la fila 1
-		let num_id = gRA(1,99999);
-		//------------------------------------ Insertar Proietario--------------------------------------
-		connection.query('INSERT INTO propietario SET ? ', {
-			id_propietario:num_id,// campo de la BD : dato del formulario (Fun)
-			propietario:informe[47][i]
-		},async (error, results) => {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log("Proietario: "+num_id+" insertado");
+	const nombre = req.body.nombre;
+	const emision= req.body.emision;
+	const catastro= req.body.catastro;	
+	const vigencia = req.body.vigencia;
+	const periodo = req.body.periodo;
+	const ubicacion = req.body.ubicacion;
+	const tipos = req.body.tipos;
+	const manifes = req.body.manifes;
+	const licencias = req.body.licencias;
+	const uso = req.body.uso;
+	const m_predio = req.body.m_predio;
+	const m_responsiva = req.body.m_responsiva;
+	const snb = req.body.snb;
+	const sotanos = req.body.sotanos;
+	const viviendas = req.body.viviendas;
+	const cajones = req.body.cajones;
+	const conservacion = req.body.conservacion;
+	const estaciones = req.body.estaciones;
+	const antenas = req.body.antenas;
+	const observaciones = req.body.observaciones;
+	const propietario_1 = req.body.propietario_1;
+	if(nombre){
+		let indice = informe[4].indexOf(catastro);
+		contador.push(indice);
+		for(let i=0;i<contador.length;i++){
+			informe[49][contador[i]]='Insertado';
+		}
+		//-----------------------------------------------------------------------------------------------------------
+		connection.query('select * from propietario',(error,results_prop)=>{
+			if(error){
+				throw error;
+			}else{
+				let num_id = parseInt(Math.random() * (99999 - 1) + 1);
+				for(let i=0;i<results_prop.length;i++){
+					while(results_prop[i].id_propietario==num_id){
+						num_id=num_id+1;
+					}
+				}//for{}
+				//------------------------------------ Insertar Proietario--------------------------------------
+				connection.query('INSERT INTO propietario SET ? ', {
+					id_propietario:num_id,// campo de la BD : dato del formulario (Fun)
+					propietario:propietario_1
+				},async (error, results) => {
+					if (error) {
+						console.log(error);
+					} else {
+						console.log("Proietario: "+num_id+" insertado");
+					}
+				});
+				//------------------------------------ Insertar Predio--------------------------------------
+				connection.query('INSERT INTO predio SET ? ', {
+					id_predio:num_id,// campo de la BD : dato del formulario (Fun)
+					direccion:ubicacion,
+					superficie_predio:m_predio,
+					niveles_snb:snb,
+					niveles_bnb:sotanos,
+					viviendas:viviendas,
+					cajones:cajones,
+					altura_soporte:estaciones,
+					antenas:antenas,
+					longitud_instalacion_subt:0,
+					resp_grupo:periodo,
+					id_propietario:num_id
+				},async (error, results) => {
+					if (error) {
+						console.log(error);
+					} else {
+						console.log("Predio: "+num_id+" insertado");
+					}
+				});
+				//---------------------------------insertar datos en 1er tabla "Vigencia"----------------------------------------
+				if(vigencia=='-'){
+					connection.query('INSERT INTO vigencia SET ? ', {
+						id_vigencia:num_id,
+						expedicion:emision,
+						resp_grupo:periodo
+					},async (error, results) => {
+						if (error) {
+							console.log(error);
+						} else {
+							console.log("INSERT INTO VIGENCIA");
+						}
+					});
+				}else{
+					connection.query('INSERT INTO vigencia SET ? ', {
+						id_vigencia:num_id,
+						expedicion:emision,
+						vencimiento:vigencia,
+						resp_grupo:periodo
+					},async (error, results) => {
+						if (error) {
+							console.log(error);
+						} else {
+							console.log("INSERT INTO VIGENCIA");
+						}
+					});
+				}
+				
+				//---------------------------------insertar datos en 1er tabla "tipo_tramite"----------------------------------------
+				connection.query('INSERT INTO tipo_tramite SET ? ', {
+					id_tipo_tramite:num_id,
+					manifestacion:manifes,
+					licencia:licencias,
+					otra_resp:tipos,
+					resp_grupo:periodo
+				},async (error, results) => {
+					if (error) {
+						console.log(error);
+					} else {
+						console.log("INSERT INTO Tipo de tramite");
+					}
+				});
+				//---------------------------------insertar datos en 1er tabla "observaciones"----------------------------------------
+				connection.query('INSERT INTO observaciones SET ? ', {
+					id_observaciones:num_id,
+					descripcion:observaciones,
+					resp_grupo:periodo,
+					id_tipo_tramite:num_id
+				},async (error, results) => {
+					if (error) {
+						console.log(error);
+					} else {
+						console.log("INSERT INTO observaciones");
+					}
+				});
+				//---------------------------------insertar datos en 1er tabla "responsiva"----------------------------------------
+				connection.query('INSERT INTO responsiva SET ? ', {
+					id_responsiva:num_id,
+					nom_r:nombre,
+					superficie_responsiva:m_responsiva,
+					num_catastral:catastro,
+					uso:uso,
+					area_patrimonial:conservacion,
+					uso_de_suelo:'-',
+					resp_grupo:periodo,
+					id_usuario:req.session.name_2,//agregar el id de la tabla con la consulta de variable de sesion para crear la relacion 
+					id_vigencia:num_id,
+					id_tipo_tramite:num_id,
+					id_predio:num_id,
+					id_observaciones:num_id
+				},async (error, results) => {
+					if (error) {
+						console.log(error);
+					} else {
+						console.log("INSERT INTO Responsiva");
+					}
+				});
 			}
-		});
-		//------------------------------------ Insertar Proietario--------------------------------------
-		connection.query('INSERT INTO propietario SET ? ', {
-			id_propietario:num_id,// campo de la BD : dato del formulario (Fun)
-			propietario:informe[47][i]
-		},async (error, results) => {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log("Proietario: "+num_id+" insertado");
-			}
-		});
-		//------------------------------------ Insertar Predio--------------------------------------
-		connection.query('INSERT INTO predio SET ? ', {
-			id_predio:num_id,// campo de la BD : dato del formulario (Fun)
-			direccion:informe[3][i],
-			superficie_predio:informe[31][i],
-			niveles_snb:informe[33][i],
-			niveles_bnb:informe[34][i],
-			viviendas:informe[35][i],
-			cajones:informe[36][i],
-			altura_soporte:informe[39][i],
-			antenas:informe[40][i],
-			longitud_instalacion_subt:informe[41][i],
-			resp_grupo:"2000/20",
-			id_propietario:num_id
-		},async (error, results) => {
-			if (error) {
-				console.log(error);
-			} else {
-				console.log("Predio: "+num_id+" insertado");
-			}
-		});
-	}
-	*/
+		});//consulta select * from propietario---------------------------------------------------
+	}//IF(nombre) para comprobar que haya datos enviados del formulario
+	//--------------------------------------------------------------------------------------------------------
 	connection.query('select * from propietario;',(error,results)=>{
 		if(error){
 			throw error;
@@ -2117,35 +2178,40 @@ app.post('/files', upload.single('avatar') ,async (req,res)=>{
 	})
 });
 
-app.get('/archivos',(req,res)=>{
-	res.render('archivos.ejs');
-	//res.sendFile('archivos.ejs')
-});
-
-
-
-
 // Consultas con app. get 
 app.get('/consultas', (req, res) => {
-	connection.query('select * from usuarios;',(error,results)=>{
+	const consulta_1 = `SELECT r.nom_r, DATE_FORMAT(v.expedicion, "%d-%m-%Y") AS expe, DATE_FORMAT(v.vencimiento, "%d-%m-%Y") as venci, pre.direccion, r.num_catastral, t.manifestacion, t.licencia, t.otra_resp,
+	r.uso, pre.superficie_predio, r.superficie_responsiva, pre.niveles_snb, pre.niveles_bnb, 
+	pre.viviendas, pre.cajones, r.uso_de_suelo, r.area_patrimonial, pre.altura_soporte, pre.antenas, pre.longitud_instalacion_subt,
+	u.num_registro, pro.propietario, o.descripcion, r.resp_grupo, pro.razon, pro.nom_pro, pro.ape1_pro, pro.ape2_pro,
+	pro.telefono, pro.rfc, r.id_responsiva AS responsiva_id
+	FROM usuarios as u 
+	INNER JOIN responsiva as r  ON u.id_usuario = r.id_usuario 
+	INNER JOIN vigencia as v  ON v.id_vigencia = r.id_vigencia 
+	INNER JOIN predio as pre  ON pre.id_predio = r.id_predio 
+	INNER JOIN tipo_tramite as t  ON t.id_tipo_tramite = r.id_tipo_tramite 
+	INNER JOIN propietario as pro  ON pro.id_propietario = pre.id_propietario
+	INNER JOIN observaciones as o  ON o.id_observaciones = r.id_observaciones  
+	WHERE u.id_usuario = 9319
+	ORDER BY v.expedicion;`;
+
+	connection.query(consulta_1,(error,results)=>{
 		if(error){
 			throw error;
 		}else{
 			if (req.session.loggedin) {
-				results.forEach(element => console.log(element.nombre));
-				//console.log("results= ",results[0].email_usuario);
+				//console.log("results= ",results[1]);
 				res.render('consultas.ejs', {
-					results:results,
 					login: true,
-					name: req.session.name
-					
+					name: req.session.name,
+					results:results				
 				});
+				/*
 				var doc = new PDF();
 				doc.pipe(fs.createWriteStream(__dirname+'/public/pdf/ejemplo.pdf'));
 				
 				doc.text('Nombres: ');
 				results.forEach(element => {
-					
 					doc.text(element.nombre,{
 						align:'justify'
 					});
@@ -2155,6 +2221,7 @@ app.get('/consultas', (req, res) => {
 				});
 				
 				doc.end();
+				*/
 				//console.log("PDF CREADO");
 			} else {
 				res.render('index.ejs', {
@@ -2164,32 +2231,10 @@ app.get('/consultas', (req, res) => {
 			}
 			res.end();
 		}
-	})
+	});
 });
 
-/*
-app.get('/consultas', (req, res) => {
-	var doc = new PDF();
-	doc.pipe(fs.createWriteStream(__dirname+'/public/pdf/ejemplo.pdf'));
-	doc.text('Hola mundo',{
-		align:'justify'
-	});
-	doc.end();
-	console.log("PDF CREADO");
-	if (req.session.loggedin) {
-		res.render('consultas.ejs', {
-			login: true,
-			name: req.session.name
-		});
-	} else {
-		res.render('index.ejs', {
-			login: false,
-			name: 'Debe iniciar sesión',
-		});
-	}
-	res.end();
-});
-*/
+
 app.get('/informes', (req, res) => {
 	if (req.session.loggedin) {
 		res.render('informes.ejs', {
@@ -2240,28 +2285,4 @@ app.get('/logout', function (req, res) {
 
 app.listen(3000, (req, res) => {
 	console.log('Server runing in http://localhost:3000');
-}
-
-)
-/*
-//Manejador de archivos de excel
-const xlsx = require('xlsx');
-const wb = xlsx.readFile("informe.xlsx");
-//var ws = wb.Sheets['DRO Y C '];
-const wbs = wb.SheetNames;
-const ws = wb.Sheets[wbs[0]];
-
-console.log(wbs);
-console.log(ws.B7.v);
-console.log(ws.B8.v);
-console.log(ws.A9.v +": "+ ws.B9.v);
-console.log(ws.B10.v);
-console.log(ws.B11.v);
-console.log(ws.B12.v);
-console.log(ws.B13.v);
-console.log(ws.B14.v);
-console.log(ws.B15.v);
-
-
-//leerExcel("informe.xlsx");
-*/
+});

@@ -1,7 +1,5 @@
 let informe = document.getElementById('informe');
 const ids_propietarios= document.getElementById('pros');
-
-
 try{
     let resp_0 = document.getElementById('resp_0');//.split(",")
     if(resp_0){
@@ -87,7 +85,6 @@ try{
 }catch(e){
     console.log("El error es: ",e);
 }
-
 const agregarForm = (e) => {
 	console.log(e.target.name);
     switch (e.target.name) {
@@ -96,8 +93,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_0').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__0[0];
             document.getElementById('emision').value=resp__0[1];
-            if(resp__0[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__0[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__0[2];
             }
@@ -256,7 +254,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__0[38];
             document.getElementById('estaciones').value=resp__0[39];
             document.getElementById('antenas').value=resp__0[40];
-            document.getElementById('propietario').value=resp__0[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__0[47];//47 propietario
             document.getElementById('observaciones').value=resp__0[48];//48 observaciones
             //document.getElementById('img_0').src="resource/img/arrow-up-square-fill.svg";
         break;
@@ -265,8 +263,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_1').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__1[0];
             document.getElementById('emision').value=resp__1[1];
-            if(resp__1[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__1[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__1[2];
             }
@@ -425,7 +424,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__1[38];
             document.getElementById('estaciones').value=resp__1[39];
             document.getElementById('antenas').value=resp__1[40];
-            document.getElementById('propietario').value=resp__1[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__1[47];//47 propietario
             document.getElementById('observaciones').value=resp__1[48];//48 observaciones
         break;
         case "img_2":
@@ -433,8 +432,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_2').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__2[0];
             document.getElementById('emision').value=resp__2[1];
-            if(resp__2[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__2[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__2[2];
             }
@@ -593,7 +593,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__2[38];
             document.getElementById('estaciones').value=resp__2[39];
             document.getElementById('antenas').value=resp__2[40];
-            document.getElementById('propietario').value=resp__2[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__2[47];//47 propietario
             document.getElementById('observaciones').value=resp__2[48];
         break;
         case "img_3":
@@ -601,8 +601,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_3').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__3[0];
             document.getElementById('emision').value=resp__3[1];
-            if(resp__3[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__3[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__3[2];
             }
@@ -761,7 +762,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__3[38];
             document.getElementById('estaciones').value=resp__3[39];
             document.getElementById('antenas').value=resp__3[40];
-            document.getElementById('propietario').value=resp__3[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__3[47];//47 propietario
             document.getElementById('observaciones').value=resp__3[48];//48 observaciones
         break;
         case "img_4":
@@ -769,8 +770,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_4').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__4[0];
             document.getElementById('emision').value=resp__4[1];
-            if(resp__4[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__4[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__4[2];
             }
@@ -929,7 +931,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__4[38];
             document.getElementById('estaciones').value=resp__4[39];
             document.getElementById('antenas').value=resp__4[40];
-            document.getElementById('propietario').value=resp__4[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__4[47];//47 propietario
             document.getElementById('observaciones').value=resp__4[48];//48 observaciones
         break;
         case "img_5":
@@ -937,8 +939,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_5').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__5[0];
             document.getElementById('emision').value=resp__5[1];
-            if(resp__5[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__5[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__5[2];
             }
@@ -1097,7 +1100,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__5[38];
             document.getElementById('estaciones').value=resp__5[39];
             document.getElementById('antenas').value=resp__5[40];
-            document.getElementById('propietario').value=resp__5[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__5[47];//47 propietario
             document.getElementById('observaciones').value=resp__5[48];//48 observaciones
         break;
         case "img_6":
@@ -1105,8 +1108,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_6').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__6[0];
             document.getElementById('emision').value=resp__6[1];
-            if(resp__6[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__6[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__6[2];
             }
@@ -1265,7 +1269,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__6[38];
             document.getElementById('estaciones').value=resp__6[39];
             document.getElementById('antenas').value=resp__6[40];
-            document.getElementById('propietario').value=resp__6[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__6[47];//47 propietario
             document.getElementById('observaciones').value=resp__6[48];//48 observaciones
         break;
         case "img_7":
@@ -1273,8 +1277,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_7').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__7[0];
             document.getElementById('emision').value=resp__7[1];
-            if(resp__7[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__7[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__7[2];
             }
@@ -1433,7 +1438,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__7[38];
             document.getElementById('estaciones').value=resp__7[39];
             document.getElementById('antenas').value=resp__7[40];
-            document.getElementById('propietario').value=resp__7[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__7[47];//47 propietario
             document.getElementById('observaciones').value=resp__7[48];//48 observaciones
         break;
         case "img_8":
@@ -1441,8 +1446,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_8').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__8[0];
             document.getElementById('emision').value=resp__8[1];
-            if(resp__8[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__8[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__8[2];
             }
@@ -1601,7 +1607,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__8[38];
             document.getElementById('estaciones').value=resp__8[39];
             document.getElementById('antenas').value=resp__8[40];
-            document.getElementById('propietario').value=resp__8[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__8[47];//47 propietario
             document.getElementById('observaciones').value=resp__8[48];//48 observaciones
         break;
         case "img_9":
@@ -1609,8 +1615,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_9').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__9[0];
             document.getElementById('emision').value=resp__9[1];
-            if(resp__9[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__9[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__9[2];
             }
@@ -1769,7 +1776,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__9[38];
             document.getElementById('estaciones').value=resp__9[39];
             document.getElementById('antenas').value=resp__9[40];
-            document.getElementById('propietario').value=resp__9[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__9[47];//47 propietario
             document.getElementById('observaciones').value=resp__9[48];//48 observaciones
         break;
         case "img_10":
@@ -1777,8 +1784,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_10').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__10[0];
             document.getElementById('emision').value=resp__10[1];
-            if(resp__10[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__10[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__10[2];
             }
@@ -1937,7 +1945,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__10[38];
             document.getElementById('estaciones').value=resp__10[39];
             document.getElementById('antenas').value=resp__10[40];
-            document.getElementById('propietario').value=resp__10[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__10[47];//47 propietario
             document.getElementById('observaciones').value=resp__10[48];//48 observaciones
         break;
         case "img_11":
@@ -1945,8 +1953,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_11').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__11[0];
             document.getElementById('emision').value=resp__11[1];
-            if(resp__11[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__11[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__11[2];
             }
@@ -2105,7 +2114,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__11[38];
             document.getElementById('estaciones').value=resp__11[39];
             document.getElementById('antenas').value=resp__11[40];
-            document.getElementById('propietario').value=resp__11[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__11[47];//47 propietario
             document.getElementById('observaciones').value=resp__11[48];//48 observaciones
         break;
         case "img_12":
@@ -2113,8 +2122,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_12').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__12[0];
             document.getElementById('emision').value=resp__12[1];
-            if(resp__12[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__12[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__12[2];
             }
@@ -2273,7 +2283,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__12[38];
             document.getElementById('estaciones').value=resp__12[39];
             document.getElementById('antenas').value=resp__12[40];
-            document.getElementById('propietario').value=resp__12[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__12[47];//47 propietario
             document.getElementById('observaciones').value=resp__12[48];//48 observaciones
         break;
         case "img_13":
@@ -2281,8 +2291,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_13').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__13[0];
             document.getElementById('emision').value=resp__13[1];
-            if(resp__13[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__13[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__13[2];
             }
@@ -2441,7 +2452,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__13[38];
             document.getElementById('estaciones').value=resp__13[39];
             document.getElementById('antenas').value=resp__13[40];
-            document.getElementById('propietario').value=resp__13[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__13[47];//47 propietario
             document.getElementById('observaciones').value=resp__13[48];//48 observaciones
         break;
         case "img_14":
@@ -2449,8 +2460,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_14').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__14[0];
             document.getElementById('emision').value=resp__14[1];
-            if(resp__14[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__14[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__14[2];
             }
@@ -2609,7 +2621,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__14[38];
             document.getElementById('estaciones').value=resp__14[39];
             document.getElementById('antenas').value=resp__14[40];
-            document.getElementById('propietario').value=resp__14[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__14[47];//47 propietario
             document.getElementById('observaciones').value=resp__14[48];//48 observaciones
         break;
         case "img_15":
@@ -2617,8 +2629,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_15').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__15[0];
             document.getElementById('emision').value=resp__15[1];
-            if(resp__15[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__15[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__15[2];
             }
@@ -2777,7 +2790,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__15[38];
             document.getElementById('estaciones').value=resp__15[39];
             document.getElementById('antenas').value=resp__15[40];
-            document.getElementById('propietario').value=resp__15[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__15[47];//47 propietario
             document.getElementById('observaciones').value=resp__15[48];//48 observaciones
         break;
         case "img_16":
@@ -2785,8 +2798,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_16').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__16[0];
             document.getElementById('emision').value=resp__16[1];
-            if(resp__16[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__16[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__16[2];
             }
@@ -2945,7 +2959,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__16[38];
             document.getElementById('estaciones').value=resp__16[39];
             document.getElementById('antenas').value=resp__16[40];
-            document.getElementById('propietario').value=resp__16[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__16[47];//47 propietario
             document.getElementById('observaciones').value=resp__16[48];//48 observaciones
         break;
         case "img_17":
@@ -2953,8 +2967,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_17').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__17[0];
             document.getElementById('emision').value=resp__17[1];
-            if(resp__17[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__17[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__17[2];
             }
@@ -3113,7 +3128,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__17[38];
             document.getElementById('estaciones').value=resp__17[39];
             document.getElementById('antenas').value=resp__17[40];
-            document.getElementById('propietario').value=resp__17[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__17[47];//47 propietario
             document.getElementById('observaciones').value=resp__17[48];//48 observaciones
         break;
         case "img_18":
@@ -3121,8 +3136,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_18').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__18[0];
             document.getElementById('emision').value=resp__18[1];
-            if(resp__18[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__18[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__18[2];
             }
@@ -3281,7 +3297,7 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__18[38];
             document.getElementById('estaciones').value=resp__18[39];
             document.getElementById('antenas').value=resp__18[40];
-            document.getElementById('propietario').value=resp__18[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__18[47];//47 propietario
             document.getElementById('observaciones').value=resp__18[48];//48 observaciones
         break;
         case "img_19":
@@ -3289,8 +3305,9 @@ const agregarForm = (e) => {
             document.getElementById('fila_19').innerHTML='<img id="img_0" name="img_0" src="resource/img/arrow-up-square-fill.svg" width="60" height="30"><br>Cargado al Formulario';
             document.getElementById('nombre').value=resp__19[0];
             document.getElementById('emision').value=resp__19[1];
-            if(resp__19[2]=="NaN-aN-aN"){
-                console.log("La vigencia no existe");
+            if(resp__19[2]=="-"){
+                document.getElementById('vigencia').type='text';
+                document.getElementById('vigencia').value='-';
             }else{
                 document.getElementById('vigencia').value=resp__19[2];
             }
@@ -3449,17 +3466,27 @@ const agregarForm = (e) => {
             document.getElementById('conservacion').value=resp__19[38];
             document.getElementById('estaciones').value=resp__19[39];
             document.getElementById('antenas').value=resp__19[40];
-            document.getElementById('propietario').value=resp__19[47];//47 propietario
+            document.getElementById('propietario_1').value=resp__19[47];//47 propietario
             document.getElementById('observaciones').value=resp__19[48];//48 observaciones
         break;
     }
 
 }
-
 const imgs = document.querySelectorAll('#tabla img');
 imgs.forEach((img) => {
 	img.addEventListener('click', agregarForm);
 });
+
+function enviar_formulario_2(){
+    document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
+	document.getElementById("formulario").submit();   
+    console.log("FORMULARIO_FILE ENVIADO");
+	setTimeout(() => {
+		document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+		formulario.reset();
+	}, 1000);
+}
+
 
 
 // CONVERTIR EL DATATIME A FORMATO NORMAL  PARA LA SAILDA DE DATOS
