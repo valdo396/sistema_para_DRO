@@ -301,6 +301,7 @@ INNER JOIN vigencia as v  ON v.id_vigencia = r.id_vigencia
 WHERE u.id_usuario = 9319;
 
 
+
 SELECT r.nom_r, DATE_FORMAT(v.expedicion, "%d-%m-%Y") AS expe, DATE_FORMAT(v.vencimiento, "%d-%m-%Y") as venci, pre.direccion, r.num_catastral, t.manifestacion, t.licencia, t.otra_resp,
 r.uso, pre.superficie_predio, r.superficie_responsiva, pre.niveles_snb, pre.niveles_bnb, 
 pre.viviendas, pre.cajones, r.uso_de_suelo, r.area_patrimonial, pre.altura_soporte, pre.antenas, pre.longitud_instalacion_subt,
@@ -315,6 +316,12 @@ INNER JOIN propietario as pro  ON pro.id_propietario = pre.id_propietario
 INNER JOIN observaciones as o  ON o.id_observaciones = r.id_observaciones  
 WHERE u.id_usuario = 9319
 ORDER BY v.expedicion;
+
+
+SELECT r.id_responsiva, r.nom_r v.expedicion, v.vencimiento, r.uso
+FROM responsiva as r
+INNER JOIN vigencia as v  ON r.id_vigencia = v.id_vigencia ;
+WHERE u.id_usuario = 9319;
 
 
 +------------------+--------------+------+-----+---------+-------+

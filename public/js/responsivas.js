@@ -7,7 +7,7 @@ const radio_mujer = document.getElementById("mujer");
 const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s\d\-\:\.\!\/]{5,100}$/, // Letras y espacios, pueden llevar acentos.
 	emision: /^(198[5-9]|199[0-9]|20[0-9]{2})\-(0[1-9]|1[1-2])\-(0[1-9]|[1-2][0-9]|3[0-1])/,//Fechas desde 1984 a 2099
-	vigencia:/^\-$|(198[5-9]|199[0-9]|20[0-9]{2})\-(0[1-9]|1[1-2])\-(0[1-9]|[1-2][0-9]|3[0-1])/,//Fechas desde 1984 a 2099
+	vigencia:/^\s$|\-$|(198[5-9]|199[0-9]|20[0-9]{2})\-(0[1-9]|1[1-2])\-(0[1-9]|[1-2][0-9]|3[0-1])/,//Fechas desde 1984 a 2099
 	periodo:/^(198[5-9]|199[0-9]|20[0-9]{2})\/(0[1-9]|[1-9][0-9])$/, // Período iniciando por el año/numero concecutivo 01 a 99
 	cp:/^[0-9]{5}$/, // 5 número restringir al itervalo de la CDMX.
 	calle:/^[À-ÿ\w\s\#\.]{5,40}$/, // 40 letras para la calle
@@ -64,7 +64,21 @@ function fisica() {
 	document.getElementById("grupo__prop_apellido_2").classList.remove('ocultar');
 	document.getElementById("grupo__razon").classList.add('ocultar');
 }
-
+let bandera=false;
+function archivo() {
+	if(bandera==false){
+		console.log("ingresar archivo");	
+		document.getElementById("formulario1").classList.remove('ocultar');
+		document.getElementById("legend_archivo").classList.remove('ocultar');		
+		bandera=true;
+	}else{
+		console.log("ingresar archivo");	
+		document.getElementById("formulario1").classList.add('ocultar');
+		document.getElementById("legend_archivo").classList.add('ocultar');
+		bandera=false;
+	}
+	
+}
 //Funcion para convertir mayusculas todo lo que se tenga Input RFC
 function mayus(e) {
     var tecla=e.value;
@@ -123,8 +137,13 @@ const validarFormulario = (e) => {
 		break;
 
 		case "vigencia":
+			/*emi=new Date(document.getElementById('emision').value);
+			vig=new Date(document.getElementById('vigencia').value)
+			if(emi>=vig){
+				console.log("emision es mayor o igual a vigencia");
+			}*/
 			validarCampo(expresiones.vigencia, e.target, 'vigencia');
-			//console.log("valor = "+e.target.value);
+			//console.log("valor = "+e.target.value);.getFullYear()
 		break;
 
 		case "periodo":
@@ -282,40 +301,147 @@ imges.forEach((imgs) => {
 	imgs.addEventListener('click', validarFormulario);
 });
 
+
+
+
+
+
+let salida_form=false;
 function enviar_formulario(){
 	if(campos.nombre==true ){
 		if(campos.emision==true){
-			if(campos.vigencia==true){
-				//&& campos.apellido_1 && campos.apellido_2 && campos.password && campos.correo && campos.registro
-				//formulario.reset();
-				document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
-				document.getElementById("formulario").submit();
-				console.log("FORMULARIO ENVIADO");
-				setTimeout(() => {
-					document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
-					formulario.reset();
-				}, 5000);
-				
-				document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-					icono.classList.remove('formulario__grupo-correcto');
-				});
+			if(campos.periodo==true){
+				if(campos.cp==true){
+					//&& campos.apellido_1 && campos.apellido_2 && campos.password && campos.correo && campos.registro
+					// Validar con los elementos del reglamento
+					//Validacion de espacio libre== m_predio m_responsiva
+					let a_nombre=document.getElementById('nombre').value;
+					let a_emision=document.getElementById('emision').value;
+					let a_calle=document.getElementById('calle').value;
+					let a_interi=document.getElementById('interior').value;
+					let a_exteri=document.getElementById('exterior').value;
+					let a_coloni=document.getElementById('colonia').value;
+					let a_alcald=document.getElementById('alcaldia').value;
+					let a_cp=document.getElementById('cp').value;
+					let a_uso=document.getElementById('uso').value;
+					let a_razon=document.getElementById('razon').value;
+					let a_pro=document.getElementById('propietario').value;
+					let a_ape1=document.getElementById('prop_apellido_1').value;
+					let a_ape2=document.getElementById('prop_apellido_2').value;
+					let a_cajones=document.getElementById('cajones').value;
+					let a_tipos=document.getElementById('tipos').value;
+					console.log("Tipo: "+typeof(a_cajones)+" Valor: "+a_cajones);
+
+					let a_m_predio=parseFloat(document.getElementById('m_predio').value);
+					let a_m_responsiva=parseFloat(document.getElementById('m_responsiva').value);
+					let a_snb=parseFloat(document.getElementById('snb').value);
+					let a_bnb=parseFloat(document.getElementById('sotanos').value);
+					let a_factor=a_snb+a_bnb;
+					console.log("factor= "+a_factor);
+					let b_predio=((a_m_predio)-(a_m_predio*(0.25)))*a_factor;
+					console.log("Calcúlo= "+b_predio);
+					if(salida_form==false&&b_predio<a_m_responsiva){
+						document.getElementById('superficie_cab').classList.remove('ocultar');
+						document.getElementById('superficie_cab').innerText=`
+						Los ${a_m_responsiva}m² de la responsiva no puede ser mayor a los : ${b_predio.toFixed(2)}m² del predio
+						Teniendo ${a_snb} niveles y ${a_bnb} sotanos.
+						Estas medidas incumplen con la Norma General de Ordenamiento 4 (30% de área libre).
+						Para mas información consulte la sección de "Leyes y Reglamentos". 
+						`;
+						document.getElementById('uso_cab').classList.remove('ocultar');
+						document.getElementById('uso_cab').innerText=`
+						Segun el Reglamento de Construcciones para el Distrito Federal en su artículo 230 dice:
+						Ningún inmueble podrá utilizarse para un uso diferente del autorizado...
+						Para mas información consulte la sección de "Leyes y Reglamentos". 
+						`;
+						foco('m_predio');
+						//console.log("El predio no puede ser mayor a la responsiva= "+b_predio+' > '+a_m_responsiva);
+						if(a_cajones=='0'||a_cajones=='-'){
+							document.getElementById('estacionamiento_cab').classList.remove('ocultar');
+							document.getElementById('estacionamiento_cab').innerText=`
+							Segun la Norma Técnica Complementaria para el Proyecto Arquitectónico señala:
+							las edificaciones deberán contar con cierto número de estacionamientos...
+							Para mas información consulte la sección de "Leyes y Reglamentos". 
+							`;
+							foco('cajones');
+						}
+						if(a_tipos=='Manifestación tipo "B"'){
+							document.getElementById('tipos_cab').classList.remove('ocultar');
+							document.getElementById('tipos_cab').innerText=`
+							Segun el RCDF en su artículo 51:
+							Establece los m² permitidos para una Manifestación tipo B...
+							Para mas información consulte la sección de "Leyes y Reglamentos". 
+							`;
+							foco('tipos');
+						}else{
+							if(a_tipos=='Manifestación tipo "C"'){
+								document.getElementById('tipos_cab').classList.remove('ocultar');
+								document.getElementById('tipos_cab').innerText=`
+								Segun el RCDF en su artículo 51:
+								Establece los m² permitidos para una Manifestación tipo C...
+								Para mas información consulte la sección de "Leyes y Reglamentos". 
+								`;
+								foco('tipos');
+							}
+						}
+						salida_form=true;
+					}else{//
+						console.log("FORMULARIO ENVIADO");
+						let emi=new Date(document.getElementById('emision').value);
+						const tempoTranscurrido = Date.now();
+						const hoy = new Date(tempoTranscurrido);
+						if(emi.getFullYear()==hoy.getFullYear()){
+							agendar(a_nombre);
+						}
+
+						/*document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
+						
+						document.getElementById("formulario").submit();
+						console.log("FORMULARIO ENVIADO");
+						setTimeout(() => {
+							document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+							formulario.reset();
+						}, 1500);
+						
+						document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
+							icono.classList.remove('formulario__grupo-correcto');
+						});
+						foco('nombre');*/
+					}
+				}else{
+					document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
+					document.getElementById('mensaje_bot').innerText='Error: Hay un campo invalido';
+					setTimeout(() => {
+						document.getElementById('mensaje_bot').innerText='Buscando, espere...3';
+						setTimeout(() => {
+							document.getElementById('mensaje_bot').innerText='Mostrando error, espere...2';
+							setTimeout(() => {
+								document.getElementById('mensaje_bot').innerText='Erro: El código postal es incorrecto';
+								setTimeout(() => {
+									document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
+									foco('cp');
+								}, 1500);
+							}, 1500);
+						}, 1500);
+					}, 1500);
+				}
 			}
 			else{
 				document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
-			document.getElementById('mensaje_bot').innerText='Error: Hay un campo invalido';
-			setTimeout(() => {
-				document.getElementById('mensaje_bot').innerText='Buscando, espere...3';
+				document.getElementById('mensaje_bot').innerText='Error: Hay un campo invalido';
 				setTimeout(() => {
-					document.getElementById('mensaje_bot').innerText='Mostrando error, espere...2';
+					document.getElementById('mensaje_bot').innerText='Buscando, espere...3';
 					setTimeout(() => {
-						document.getElementById('mensaje_bot').innerText='Erro: La fecha de vigencia es incorrecta';
+						document.getElementById('mensaje_bot').innerText='Mostrando error, espere...2';
 						setTimeout(() => {
-							document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
-							foco('vigencia');
+							document.getElementById('mensaje_bot').innerText='Erro: El periodo es incorrecto';
+							setTimeout(() => {
+								document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
+								foco('periodo');
+							}, 1500);
 						}, 1500);
 					}, 1500);
 				}, 1500);
-			}, 1500);
 			}
 		}else{
 			document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
@@ -342,7 +468,7 @@ function enviar_formulario(){
 			setTimeout(() => {
 				document.getElementById('mensaje_bot').innerText='Mostrando error, espere...2';
 				setTimeout(() => {
-					document.getElementById('mensaje_bot').innerText='Error: El nombre es incorrecto espere...1';
+					document.getElementById('mensaje_bot').innerText='Error: El nombre de la resposniva es incorrecto espere...1';
 					setTimeout(() => {
 						document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
 						foco('nombre');
@@ -351,15 +477,31 @@ function enviar_formulario(){
 			}, 1500);
 		}, 1500);
 	}
-	/*
-	document.formulario1.submit()
-	console.log("FORMULARIO ENVIADO");
-	setTimeout(() => {
-		document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
-		formulario.reset();
-	}, 5000);
-	*/
 }
+
+function agendar(nombre) {//c,ni,ex,co,al,cp,ti,us,pro
+	Swal.fire({
+		title: 'Se ha ingresado una responsiva activa',
+		text: 'Seleccione una propuesta para las visitas a obra',
+		imageUrl: 'resource/img/opciones.png',
+		imageWidth: 600,
+		imageHeight: 200,
+		showDenyButton: true,
+		showCancelButton: true,
+		confirmButtonText: 'Opcion 1',
+		denyButtonText: `Opción 2`,
+		cancelButtonText:'Omitir visitas'
+	}).then((result) => {
+		if (result.isConfirmed) {
+				Swal.fire('Gracias por tu elección', '', 'success');
+				window.location = '/opt_1/'+nombre;  
+		}else if (result.isDenied) {
+				Swal.fire('Gracias por tu elección', '', 'success');
+				window.location = '/opt_2/'+nombre;  
+
+		}	                        
+	});
+};
 /*
 formulario.addEventListener('submit', (e) => {
 	e.preventDefault();

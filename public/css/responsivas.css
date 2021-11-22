@@ -97,7 +97,7 @@ input textarea{
 }
 
 .input-entrada:focus{
-    border-color: #18A383;
+    border-color: #7c7e7d;
 }
 
 .center-content{
@@ -155,7 +155,7 @@ input textarea{
 }
 
 .radio > label:hover{
-    background-color: burlywood;
+    background-color: rgba(167, 167, 167, 0.178);
 }
 
 .radio > label:before{
@@ -184,7 +184,8 @@ input textarea{
 
 
 legend{
-  text-align: center;
+    font-size: 18px;
+    text-align: center;
 }
 
 .formulario {
@@ -374,7 +375,7 @@ legend{
 }
 
 .formulario__btn:hover {
-	box-shadow: 3px 0px 30px rgba(163,163,163, 1);
+	box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.767);
 }
 
 .formulario__mensaje-exito {
@@ -457,6 +458,7 @@ legend{
 
 
 .form-archivo{
+    margin: 20px auto;
     display: flex;
     font-size:15px;
 }
@@ -464,3 +466,16 @@ legend{
 .ocultar{
     display: none;
 }
+
+.boton_archivo{
+    color: azure;
+    background-color: #97a09f;
+}
+.boton_archivo:hover{
+    background-color: #97a09fc0
+}
+
+.formulario1{
+    margin-bottom: 10px;
+}
+

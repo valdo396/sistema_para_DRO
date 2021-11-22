@@ -16,7 +16,7 @@ window.addEventListener("scroll", function(){
       }
 
   });
-*/
+
 const newLocal_1 = '.menu';
   //javascript for responsive navigation sidebar menu
   var menu = document.querySelector(newLocal_1);
@@ -31,6 +31,8 @@ const newLocal_1 = '.menu';
   closeBtn.addEventListener("click", () => {
     menu.classList.remove('active');
   });
+
+  */
 
 
 

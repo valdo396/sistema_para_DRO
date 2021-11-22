@@ -92,7 +92,7 @@ header.down{
 }
 
 @media (max-width: 991px){
-  header, header.down{
+  .menu, .menu.down{
   	padding: 20px 20px;
   }
   .btn{

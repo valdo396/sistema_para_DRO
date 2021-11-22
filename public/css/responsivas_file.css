@@ -468,29 +468,55 @@ legend{
 
 
 .lista_responsivas{
-    padding: 20px;
-    background-color: #97a09f;
+    padding: 10px;
     border-radius: 30px;
     margin: 10px 10px;
 }
 
 .tabla_p{
-    width: 100%;
-    margin: 100px;
+    margin: auto;
+    width: 90%;
     padding: 10px;
 }
 .tabla_h{
-    background-color: #9a97a05d;
+    border: #000 5px solid;
+    color: #fff;
+    background: #000;
     text-align: center;
     font-size: 20px;
-    border: rgba(124, 124, 126, 0.288) 5px solid;
+    
 }
 
 .tabla_cont{
     text-align:left;
     font-size: 15px;
-    border-radius: 50px;
-    border: rgb(138, 129, 129) 5px solid;
+    border-radius: 50px; ;
+    
+    border: rgba(0, 0, 0, 0.178) 5px solid;
     
 }
 
+.cabecera{
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background: rgba(0, 0, 0, 0.733);
+	font-size: 13px;
+	font-weight: bolder;
+	margin-top: 1px;
+	margin-bottom: 0.1px;
+    width: 99%;
+    color: rgb(209, 65, 65);
+
+	padding: 10px;
+}
+
+
+
+.form-archivo{
+    margin: 20px auto;
+    display: flex;
+    font-size:15px;
+}
+.ocultar{
+    display: none;
+}

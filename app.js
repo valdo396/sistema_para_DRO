@@ -2180,7 +2180,9 @@ app.post('/files', upload.single('avatar') ,async (req,res)=>{
 
 // Consultas con app. get 
 app.get('/consultas', (req, res) => {
-	const consulta_1 = `SELECT r.nom_r, DATE_FORMAT(v.expedicion, "%d-%m-%Y") AS expe, DATE_FORMAT(v.vencimiento, "%d-%m-%Y") as venci, pre.direccion, r.num_catastral, t.manifestacion, t.licencia, t.otra_resp,
+	const consulta_1 = `SELECT r.nom_r, DATE_FORMAT(v.expedicion, "%d-%m-%Y") AS expe, DATE_FORMAT(v.vencimiento, "%d-%m-%Y") as venci, 
+	pre.direccion, pre.calle, pre.num_interior, pre.num_exterior, pre.colonia, pre.alcaldia, pre.cp, 
+	r.num_catastral, t.manifestacion, t.licencia, t.otra_resp,
 	r.uso, pre.superficie_predio, r.superficie_responsiva, pre.niveles_snb, pre.niveles_bnb, 
 	pre.viviendas, pre.cajones, r.uso_de_suelo, r.area_patrimonial, pre.altura_soporte, pre.antenas, pre.longitud_instalacion_subt,
 	u.num_registro, pro.propietario, o.descripcion, r.resp_grupo, pro.razon, pro.nom_pro, pro.ape1_pro, pro.ape2_pro,
@@ -2192,10 +2194,9 @@ app.get('/consultas', (req, res) => {
 	INNER JOIN tipo_tramite as t  ON t.id_tipo_tramite = r.id_tipo_tramite 
 	INNER JOIN propietario as pro  ON pro.id_propietario = pre.id_propietario
 	INNER JOIN observaciones as o  ON o.id_observaciones = r.id_observaciones  
-	WHERE u.id_usuario = 9319
+	WHERE u.id_usuario = ?
 	ORDER BY v.expedicion;`;
-
-	connection.query(consulta_1,(error,results)=>{
+	connection.query(consulta_1,[req.session.name_2],(error,results)=>{
 		if(error){
 			throw error;
 		}else{
@@ -2234,6 +2235,46 @@ app.get('/consultas', (req, res) => {
 	});
 });
 
+app.get('/opt_1/:nombre',(req,res)=>{
+	const nombre= req.params.nombre;
+	connection.query(`SELECT r.nom_r, DATE_FORMAT(v.expedicion, "%d-%m-%Y") AS expe, DATE_FORMAT(v.vencimiento, "%d-%m-%Y") as venci, 
+	pre.direccion, pre.calle, pre.num_interior, pre.num_exterior, pre.colonia, pre.alcaldia, pre.cp, 
+	r.num_catastral, t.manifestacion, t.licencia, t.otra_resp,
+	r.uso, pre.superficie_predio, r.superficie_responsiva, pre.niveles_snb, pre.niveles_bnb, 
+	pre.viviendas, pre.cajones, r.uso_de_suelo, r.area_patrimonial, pre.altura_soporte, pre.antenas, pre.longitud_instalacion_subt,
+	u.num_registro, pro.propietario, o.descripcion, r.resp_grupo, pro.razon, pro.nom_pro, pro.ape1_pro, pro.ape2_pro,
+	pro.telefono, pro.rfc, r.id_responsiva AS responsiva_id
+	FROM usuarios as u 
+	INNER JOIN responsiva as r  ON u.id_usuario = r.id_usuario 
+	INNER JOIN vigencia as v  ON v.id_vigencia = r.id_vigencia 
+	INNER JOIN predio as pre  ON pre.id_predio = r.id_predio 
+	INNER JOIN tipo_tramite as t  ON t.id_tipo_tramite = r.id_tipo_tramite 
+	INNER JOIN propietario as pro  ON pro.id_propietario = pre.id_propietario
+	INNER JOIN observaciones as o  ON o.id_observaciones = r.id_observaciones  
+	WHERE r.nom_r = ?
+	ORDER BY v.expedicion;`,[nombre],(error,result)=>{
+		if(error){
+			throw error;
+		}else{
+			res.render('opt_1.ejs',{name: req.session.name,nombre:result});
+			/*var doc = new PDF();
+			doc.pipe(fs.createWriteStream(__dirname+'/public/pdf/ejemplo.pdf'));
+			
+			doc.text('Nombres: ');
+			results.forEach(element => {
+				doc.text(element.nombre,{
+					align:'justify'
+				});
+				doc.text(element.num_registro,{
+					align:'justify'
+				});
+			});
+			doc.end();
+			console.log("PDF CREADO");*/
+		}
+	})
+
+});
 
 app.get('/informes', (req, res) => {
 	if (req.session.loggedin) {
@@ -2286,3 +2327,49 @@ app.get('/logout', function (req, res) {
 app.listen(3000, (req, res) => {
 	console.log('Server runing in http://localhost:3000');
 });
+
+/*
+function validarResponsivas(){
+	connection.query(`
+		SELECT r.id_responsiva, r.nom_r v.expedicion, v.vencimiento, r.uso
+		FROM responsiva as r
+		INNER JOIN vigencia as v  ON r.id_vigencia = v.id_vigencia;
+		`,(error,resultados)=>{
+		if(error){
+			throw error;
+		}else{
+			const fecha = Date.now();
+			const hoy = new Date(fecha);
+			if(validarFechas(resultados,hoy)){
+				await transporter.sendMail({
+					from: '"RESPONSIVA POR VENCER ✔✔" <valdo314@gmail.com>', //
+					to: correo, //
+					subject: "Notificación de proximo vencimiento de responsiva", // 
+					html: `
+					<table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+						<tr>
+							<td style="background-color: #ecf0f1">
+								<div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif">
+									<h2 style="text-align: center; background-color: #AD0011; color: #fff; margin: 0 0 7px">Sistema de gestión administrativa de apoyo a las funciones de un Director Responsable de Obra en la CDMX.</h2>
+									<p style="color: #000; margin: 25px; font-size: 16px">
+										Estimado(a) ${nombre} ${apellido_1}:
+									<br><br> Has introducido ${correo} como correo electrónico de contacto. Para completar el proceso, debemos verificar que esa dirección de correo electrónico te pertenece. Basta con que pulses verificar e inicies sesión en el sistema.
+									<br><br></p>
+									<p style="text-align: center;">Dar click en el enlace para verificar la cuenta</p>
+									<div style="width: 100%; text-align: center">
+										<a style="text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db" href="http://localhost:3000/${token}">Verificar</a>	
+									</div>
+									<p style="text-align: center;">El código espirara en 60min.</p>
+									<p style="color: #b3b3b3; font-size: 12px; text-align: center;margin: 30px 0 0">Desing from TT 2020-B055</p>
+								</div>
+							</td>
+						</tr>
+					</table>
+					`, // html body
+				});
+			}
+		}
+	})
+}
+
+*/
